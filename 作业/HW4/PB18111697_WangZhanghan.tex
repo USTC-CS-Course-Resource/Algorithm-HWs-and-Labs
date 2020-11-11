@@ -1,0 +1,367 @@
+\documentclass[UTF8]{article}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{makecell}
+\usepackage[utf8]{inputenc}
+\usepackage[space]{ctex} %中文包
+\usepackage{listings} %放代码
+\usepackage{xcolor} %代码着色宏包
+\usepackage{CJK} %显示中文宏包
+\usepackage{float}
+\usepackage{diagbox}
+\usepackage{bm}
+\usepackage{ulem} 
+\usepackage{amssymb}
+\usepackage{soul}
+\usepackage{color}
+\usepackage{geometry}
+\usepackage{fancybox} %花里胡哨的盒子
+\usepackage{xhfill} %填充包, 可画分割线 https://www.latexstudio.net/archives/8245
+\usepackage{multicol} %多栏包
+\usepackage{enumerate} %可以方便地自定义枚举标题
+\usepackage{multirow} %表格中多行单元格合并
+\usepackage{wasysym} %可以使用wasysym里的一堆奇奇怪怪的符号
+\usepackage{hyperref} % url
+%%%%%%%%%%%%%%%伪代码%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+%%%%%%%%%%%%%%%画图包%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usepackage{pgfplots} % http://pgfplots.sourceforge.net/gallery.html
+\usetikzlibrary{pgfplots.patchplots} % 拟合支持
+\usetikzlibrary{arrows,shapes,automata,petri,positioning,calc} % 状态图支持
+\usetikzlibrary{arrows.meta} % 箭头
+\usetikzlibrary{shadows} % 阴影支持
+\usepackage{forest} % 画树
+
+\geometry{left = 1.5cm, right = 1.5cm, top=1.5cm, bottom=2cm}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{
+	backgroundcolor=\color{white}, 
+	%\tiny < \scriptsize < \footnotesize < \small < \normalsize < \large < \Large < \LARGE < \huge < \Huge
+	basicstyle = \footnotesize,       
+	breakatwhitespace = false,        
+	breaklines = true,                 
+	captionpos = b,                    
+	commentstyle = \color{mygreen}\bfseries,
+	extendedchars = false,
+	frame = shadowbox, 
+	framerule=0.5pt,
+	keepspaces=true,
+	keywordstyle=\color{blue}\bfseries, % keyword style
+	language = C++,                     % the language of code
+	otherkeywords={string}, 
+	numbers=left, 
+	numbersep=5pt,
+	numberstyle=\tiny\color{mygray},
+	rulecolor=\color{black},         
+	showspaces=false,  
+	showstringspaces=false, 
+	showtabs=false,    
+	stepnumber=1,         
+	stringstyle=\color{mymauve},        % string literal style
+	tabsize=4,          
+	title=\lstname           
+}
+
+%\sum\nolimits_{j=1}^{M}   上下标位于求和符号的水平右端，
+%\sum\limits_{j=1}^{M}   上下标位于求和符号的上下处，
+%\sum_{j=1}^{M}  对上下标位置没有设定，会随公式所处环境自动调整。
+
+%%%%%%%%%%%%%画图包%%%%%%%%%%%%%
+\usepackage{tikz}
+%%%%%%%%%%%%%好看的矩形%%%%%%%%%%%%%
+\tikzset{
+	rect1/.style = {
+		shape = rectangle,% 指定样式
+		minimum height=2cm,% 最小高度
+		minimum width=4cm,% 最小宽度
+		align = center,% 文字居中
+		drop shadow,% 阴影
+	}
+}
+%%%%%%%%%%%%%画图背景包%%%%%%%%%%%%%
+\usetikzlibrary{backgrounds}
+
+%%%%%%%%%%%%%在tikz中画一个顶点%%%%%%%%%%%%%
+%%%%%%%%%%%%%#1:node名称%%%%%%%%%%%%%
+%%%%%%%%%%%%%#2:位置%%%%%%%%%%%%%
+%%%%%%%%%%%%%#3:标签%%%%%%%%%%%%%
+\newcommand{\newVertex}[3]{\node[circle, draw=black, line width=1pt, scale=0.8] (#1) at #2{#3}}
+%%%%%%%%%%%%%在tikz中画一条边%%%%%%%%%%%%%
+\newcommand{\newEdge}[2]{\draw [black,very thick](#1)--(#2)}
+%%%%%%%%%%%%%在tikz中放一个标签%%%%%%%%%%%%%
+%%%%%%%%%%%%%#1:名称%%%%%%%%%%%%%
+%%%%%%%%%%%%%#2:位置%%%%%%%%%%%%%
+%%%%%%%%%%%%%#3:标签内容%%%%%%%%%%%%%
+\newcommand{\newLabel}[3]{\node[line width=1pt] (#1) at #2{#3}}
+
+%%%%%%%%%%%%%强制跳过一行%%%%%%%%%%%%%
+\newcommand{\jumpLine} {\hspace*{\fill} \par}
+%%%%%%%%%%%%%关键点指令,可用itemise替代%%%%%%%%%%%%%
+\newcommand{\keypoint}[2]{$\bullet$\textbf{#1}\quad#2\par}
+%%%%%%%%%%%%%<T>平均值表示%%%%%%%%%%%%%
+\newcommand{\average}[1]{\left\langle #1\right\rangle }
+%%%%%%%%%%%%%表格内嵌套表格%%%%%%%%%%%%%
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+%%%%%%%%%%%%%大黑点item头%%%%%%%%%%%%%
+\newcommand{\itemblt}{\item[$\bullet$]}
+%%%%%%%%%%%%%大圈item头%%%%%%%%%%%%%
+\newcommand{\itemc}{\item[$\circ$]}
+%%%%%%%%%%%%%大星星item头%%%%%%%%%%%%%
+\newcommand{\itembs}{\item[$\bigstar$]}
+%%%%%%%%%%%%%右▷item头%%%%%%%%%%%%%
+\newcommand{\itemrhd}{\item[$\rhd$]}
+%%%%%%%%%%%%%定义为%%%%%%%%%%%%%
+\newcommand{\defas}{=_{df}}
+%%%%%%%%%%%%%偏导%%%%%%%%%%%%%
+\newcommand{\partialx}[2]{\frac{\partial #1}{\partial #2}}
+%%%%%%%%%%%%%蕴含%%%%%%%%%%%%%
+\newcommand{\imp}{\rightarrow}
+%%%%%%%%%%%%%上取整%%%%%%%%%%%%%
+\newcommand{\ceil}[1]{\lceil#1\rceil}
+%%%%%%%%%%%%%下取整%%%%%%%%%%%%%
+\newcommand{\floor}[1]{\lfloor#1\rfloor}
+
+%%%%%%%%%%%%%双线分割线%%%%%%%%%%%%%
+\newcommand*{\doublerule}{\hrule width \hsize height 1pt \kern 0.5mm \hrule width \hsize height 2pt}
+%%%%%%%%%%%%%双线中间可加东西的分割线%%%%%%%%%%%%%
+\newcommand\doublerulefill{\leavevmode\leaders\vbox{\hrule width .1pt\kern1pt\hrule}\hfill\kern0pt }
+%%%%%%%%%%%%%左大括号%%%%%%%%%%%%%
+\newcommand{\leftbig}[1]{\left\{\begin{array}{l}#1\end{array}\right.}
+%%%%%%%%%%%%%矩阵%%%%%%%%%%%%%
+\newcommand{\mat}[2]{\left[\begin{array}{#1}#2\end{array}\right]}
+%%%%%%%%%%%%%可换行圆角文本框%%%%%%%%%%%%%
+\newcommand{\ovalboxn}[1]{\ovalbox{\tabincell{l}{#1}}}
+%%%%%%%%%%%%%设置section的counter, 使从1开始%%%%%%%%%%%%%
+\setcounter{section}{0}
+
+%%%%%%%%%%%%%Colors%%%%%%%%%%%%%
+\newcommand{\lightercolor}[3]{% Reference Color, Percentage, New Color Name
+	\colorlet{#3}{#1!#2!white}
+}
+\newcommand{\darkercolor}[3]{% Reference Color, Percentage, New Color Name
+	\colorlet{#3}{#1!#2!black}
+}
+\definecolor{aquamarine}{rgb}{0.5, 1.0, 0.83}
+\definecolor{Seashell}{RGB}{255, 245, 238} %背景色浅一点的
+\definecolor{Firebrick4}{RGB}{255, 0, 0}%文字颜色红一点的
+\lightercolor{gray}{20}{lgray}
+\newcommand{\hlg}[1]{
+	\begingroup
+	\sethlcolor{lgray}%背景色
+	\textcolor{black}{\hl{\mbox{#1}}}%textcolor里面对应文字颜色
+	\endgroup
+}
+\lightercolor{red}{20}{lred}
+\lightercolor{black}{20}{lblack}
+\lightercolor{black}{60}{mblack}
+
+\title{算法基础 HW3}
+\author{PB18111697 王章瀚}
+
+\begin{document}
+\maketitle
+\section{}
+\noindent 红黑树\\
+\begin{enumerate}[(a). ]
+	\item 将关键字41, 38, 31, 12, 19, 8 连续地插入一棵初始为空的红黑树之后, 试画出该结果树.\\
+	插入38之后:
+	\begin{forest}
+		[41, for tree={circle,black,fill=lblack}
+			[38, for tree={circle,black,fill=lred}]
+			[,phantom]
+		];
+	\end{forest}
+	插入31之后:
+	\begin{forest}
+		[38, for tree={circle,black,fill=lblack}
+			[31, for tree={circle,black,fill=lred}]
+			[41, for tree={circle,black,fill=lred}]]
+		];
+	\end{forest}
+	插入12之后:
+	\begin{forest}
+		[38, for tree={circle,black,fill=lblack}
+			[31, for tree={circle,black,fill=lblack}
+				[12, for tree={circle,black,fill=lred}]
+				[,phantom]
+			]
+			[41, for tree={circle,black,fill=lblack}]]
+		];
+	\end{forest}\\\jumpLine
+	插入19之后:
+	\begin{forest}
+		[38, for tree={circle,black,fill=lblack}
+			[19, for tree={circle,black,fill=lblack}
+				[12, for tree={circle,black,fill=lred}]
+				[31, for tree={circle,black,fill=lred}]
+			]
+			[41, for tree={circle,black,fill=lblack}]]
+		];
+	\end{forest}
+	插入8之后(也就是最终结果):
+	\begin{forest}
+		[38, for tree={circle,black,fill=lblack}
+			[19, for tree={circle,black,fill=lred}
+				[12, for tree={circle,black,fill=lblack}
+					[8, for tree={circle,black,fill=lred}]
+					[,phantom]
+				]
+				[31, for tree={circle,black,fill=lblack}]
+			]
+			[41, for tree={circle,black,fill=lblack}]]
+		];
+	\end{forest}
+	\item 对于(a)中得到的红黑树, 依次删除8,12,19, 试画出每次删除操作后的红黑树.\\
+	删除8, 因为是红色的, 直接删除就行:
+	\begin{forest}
+		[38, for tree={circle,black,fill=lblack}
+			[19, for tree={circle,black,fill=lred}
+				[12, for tree={circle,black,fill=lblack}]
+				[31, for tree={circle,black,fill=lblack}]
+			]
+			[41, for tree={circle,black,fill=lblack}]]
+		];
+	\end{forest}\\\jumpLine
+	\begin{minipage}{\linewidth/2}
+	删除12, 
+	\begin{enumerate}[(1). ]
+	\item 其下面接上来的结点x(NIL)是双黑结点, 其兄弟是黑叶子, 按case2来fix
+	\item 之后x.p是红, 所以改为黑, 结束
+	\end{enumerate}
+	\end{minipage}
+	\begin{minipage}{\linewidth/2}
+		\begin{center}
+		\begin{forest}
+			[38, for tree={circle,black,fill=lblack}
+				[19, for tree={circle,black,fill=lblack}
+					[,phantom]
+					[31, for tree={circle,black,fill=lred}]
+				]
+				[41, for tree={circle,black,fill=lblack}]]
+			];
+		\end{forest}\\\jumpLine
+		\end{center}
+		\end{minipage}
+	删除19, 接上来红黑结点(31), 变黑即可:
+	\begin{forest}
+		[38, for tree={circle,black,fill=lblack}
+			[31, for tree={circle,black,fill=lblack}]
+			[41, for tree={circle,black,fill=lblack}]]
+		];
+	\end{forest}
+\end{enumerate}
+
+\newpage
+\section{}
+\noindent 假设我们希望记录一个区间集合的最大重叠点, 即被最多数目区间所覆盖的那个点.
+\begin{enumerate}[(a). ]
+	\item 证明: 在最大重叠点中一定存在一个点是其中一个区间的端点\\
+	证明如下:\\
+	假设找到了一个最大重叠点$x$, 但它并不是某区间的端点. 假设它在以下区间中:
+	$$\begin{array}{l}
+	\left[a_1,b_1\right]\\
+	\left[a_2,b_2\right]\\
+	\cdots\\
+	\left[a_k,b_k\right]
+	\end{array}$$
+	那么必然有
+	$$a_{(1)}\le a_{(2)}\le\cdots\le a_{(k)}\le x\le b_{(1)}\le b_{(2)}\le\cdots\le b_{(k)}$$
+	则显然, 包含$x$的这k个区间也同样包含$a_{(k)}$和$b_{(1)}$. 而这两个数则是区间的端点.
+	由此就构造出了区间端点使得其位最大重叠点之一.
+	\hfill$\square$
+	
+	\item 设计一个数据结构, 使得它能够有效地支持{\sc Interval-Insert}, {\sc Interval-Delete}, 以及返回最大重叠点的{\sc Find-Pom}操作\\
+	\begin{enumerate}[(1). ]
+		\item 构造的整体描述:\\
+		只需要构造一颗红黑树, 其key为所有2n个区间端点, 但多加两个个域
+		\begin{itemize}
+			\item lr: (即lefr right)表示其为左端点还是右端点, 若为左端点则$lr=+1$, 若为右端点则$lr=-1$
+			\item $v(x)$: 表示$x$为根节点的子树中所有结点的 $lr$ 值之和. 它可以这样递归求出:
+			$$v(x)=v(x.left)+x.lr+v(x.right)$$
+			\item $m(x)$: 即以$x$为根节点的子树的最大重叠点的相关信息, 用 \hlg{m.val} 表示最大重叠点, 用 \hlg{m.count} 表示最大重叠数.\\ 
+			\hlg{m.count} 的表达式为:
+			$$m(x).count=\max\limits_i{S(leftest(x), i)}$$
+			这里的$i$是$x$的所有后代， $leftest(x)$ 表示 $x$ 所有后代中最小的,\\ 而$S(i,j)$则是在考虑范围内, 按顺序从 $i$ 到 $j$ 结点的 $lr$ 值之和.\\
+			\hlg{m.count} 的递归计算方法如下:
+			$$m(x).count=\max\left\{\begin{array}{ll}
+			m(x.left).count & \mbox{即这个最大重叠点在x的左子树}\\
+			v(x.left)+p(x) & \mbox{即这个最大重叠点就是x}\\
+			v(x.left)+p(x)+m(x.right).count & \mbox{即这个最大重叠点在x的右子树}
+			\end{array}\right.$$
+			至于 \hlg{m.val} 则依据 \hlg{m.count} 的计算方法取出即可: 当上述求m.count的递归式确定了这个最大重叠点在左子树还是右子树还是就是x的同时, 也就确定了这个最大重叠点(如果在左(右)子树, 就是左(右)子树的最大重叠点, 否则就是x); 至于叶子结点, 就记m.val为它本身, 记m.count=1
+		\end{itemize}
+		
+		\item 对{\sc Interval-Insert}, {\sc Interval-Delete}, {\sc Find-Pom}操作的支持
+		\begin{itemize}
+			\item \textbf{{\sc Interval-Insert}}\\
+			其基础还是红黑树的插入, 特别之处在于, 寻找插入点的时候, 其路径上的所有结点上的$v$值应当加上这个新插入结点的$lr$值; 此外其m值和v值也应该相应改变(根据上述递归公式). 而旋转操作也需要有特殊的变换以维持 $lr$, $m$ 和 $v$ 的值
+			\item \textbf{{\sc Interval-Delete}}\\
+			同样, 基础也是红黑树的删除, 特别之处在于寻找删除点时, 其路径上的所有结点上的$v$值应当减去这个要删除结点的$lr$值, 此外其m值(要和插入的点的)和v值也应该相应改变(根据上述递归公式), 而旋转操作同样也要特殊变换
+			\item \textbf{{\sc Find-Pom}}:\\
+			直接可以通过 $m$ 的值取出, 是 $O(1)$ 的.
+			\item 左旋转(右旋转类似)\\
+			旋转后显然被旋转结点的子树们的m值和v值不会被改变, 但旋转了的结点需要重新按照上述递归方法计算其m值和v值.
+		\end{itemize}
+	\end{enumerate}
+\end{enumerate}
+
+\newpage
+\section{}
+\noindent (斐波那契堆删除操作的另一种实现) Pisano教授提出了下面的{\sc Fib-Heap-Delete} 过程的一个变种, 声称如果删除的结点不是由 $H.min$ 指向的结点, 那么该程序运行地更快.
+\begin{algorithm}[H]
+	\caption{{\sc Pisano-Delete}($H,x$)}
+	\begin{algorithmic}[1] %每行显示行号
+		\If{$x==H.min$}
+			\State {\sc Fib-Heap-Extract-Min}($H$)
+		\Else
+			\State $y=x.p$
+				\If{$y\not=NIL$}
+					\State {\sc CUT}($H,x,y$)
+					\State {\sc Cascading-Cut}($H,y$)
+				\EndIf
+			\State add $x$'s child list to the root list of $H$
+			\State remove $x$ from the root list of $H$
+		\EndIf
+	\end{algorithmic}
+\end{algorithm}
+\begin{enumerate}[(a).]
+	\item 该教授的声称是基于第8行可以在 O(1) 实际时间完成的这一假设, 它的程序可以运行得更快. 该假设有什么问题吗?\\
+	\begin{itemize}
+		\item x的孩子数目并非常数, 而是$\log n$的, 因此这一假设并不正确.
+	\end{itemize}
+	\item 当 x 不是由 H.min 指向时, 给出 {\sc Pisano-Delete} 实际时间的一个好(紧凑)上界. 你给出的上界应该以 $x.degree$ 和调用 {\sc Cascading-Cut} 的次数 $c$ 这两个参数来表示.\\
+	先不考虑consolidate部分\footnote{如果还要考虑上consolidate, 则还有一部分$O(D(n))$的, 但它则是$O(\log n)$的, 因此总的会变成$O(\log n+x.degree)$}(因为题目也没让考虑这个)
+	\begin{itemize}
+		\item 从\textbf{简单的分析}来看, c次调用每次O(1), 加x的孩子到根上总共要x.degree, 所以应该总的上界是\underline{O(c+x.degree)}
+		\item 从\textbf{摊还的角度}来看, {\sc Pisano-Delete}实际时间的一个紧凑上界应该可以从这几个部分分析:
+		\begin{enumerate}[(1). ]
+			\item 一些杂七杂八的操作: O(1)
+			\item {\sc Cascading-Cut}: 这里题目说可以用其次数c来表示. 显然, 除了最后一次调用, 其他 $c-1$次调用都减少了一个mark结点(但最后一次可能又标记了一个), 且每次调用都会产生新的一棵树连在 root list 中. 总之, 它引起的势变化的一个紧凑上界为:
+			$$\Delta t + \Delta 2m=c-2\times(c-2)=4-c$$
+			\item 将x的孩子加到 root list 中的势增的上界类似上述分析有:
+			$$(t(H') + 2m(H')) - (t(H) + 2m(H))=t(H')-t(H)=x.degree$$
+		\end{enumerate}
+		综上所述, 当x不是由H.min指向时, 摊还代价的上界可以考虑为:
+		$$O(1)+O(c)+4-c+x.degree$$
+		于是就可以得出, 其一个好上界可认为是\underline{$O(x.degree)$}
+	\end{itemize}
+	
+\end{enumerate}
+\end{document}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "E1.EX_Bank_Card", "E1.EX_Bank_Card\E1.EX_Bank_Card.vcxproj", "{D6AA243A-F9EF-406C-8A76-B8D173C1C0E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6AA243A-F9EF-406C-8A76-B8D173C1C0E4}.Debug|x64.ActiveCfg = Debug|x64
+		{D6AA243A-F9EF-406C-8A76-B8D173C1C0E4}.Debug|x64.Build.0 = Debug|x64
+		{D6AA243A-F9EF-406C-8A76-B8D173C1C0E4}.Debug|x86.ActiveCfg = Debug|Win32
+		{D6AA243A-F9EF-406C-8A76-B8D173C1C0E4}.Debug|x86.Build.0 = Debug|Win32
+		{D6AA243A-F9EF-406C-8A76-B8D173C1C0E4}.Release|x64.ActiveCfg = Release|x64
+		{D6AA243A-F9EF-406C-8A76-B8D173C1C0E4}.Release|x64.Build.0 = Release|x64
+		{D6AA243A-F9EF-406C-8A76-B8D173C1C0E4}.Release|x86.ActiveCfg = Release|Win32
+		{D6AA243A-F9EF-406C-8A76-B8D173C1C0E4}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F67DCD13-0659-4071-A46B-34194B563276}
+	EndGlobalSection
+EndGlobal
