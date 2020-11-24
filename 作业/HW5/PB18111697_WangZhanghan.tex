@@ -1,0 +1,255 @@
+\documentclass[UTF8]{article}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{makecell}
+\usepackage[utf8]{inputenc}
+\usepackage[space]{ctex} %中文包
+\usepackage{listings} %放代码
+\usepackage{xcolor} %代码着色宏包
+\usepackage{CJK} %显示中文宏包
+\usepackage{float}
+\usepackage{diagbox}
+\usepackage{bm}
+\usepackage{ulem} 
+\usepackage{amssymb}
+\usepackage{soul}
+\usepackage{color}
+\usepackage{geometry}
+\usepackage{fancybox} %花里胡哨的盒子
+\usepackage{xhfill} %填充包, 可画分割线 https://www.latexstudio.net/archives/8245
+\usepackage{multicol} %多栏包
+\usepackage{enumerate} %可以方便地自定义枚举标题
+\usepackage{multirow} %表格中多行单元格合并
+\usepackage{wasysym} %可以使用wasysym里的一堆奇奇怪怪的符号
+\usepackage{hyperref} % url
+%%%%%%%%%%%%%%%伪代码%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+%%%%%%%%%%%%%%%画图包%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usepackage{pgfplots} % http://pgfplots.sourceforge.net/gallery.html
+\usetikzlibrary{pgfplots.patchplots} % 拟合支持
+\usetikzlibrary{arrows,shapes,automata,petri,positioning,calc} % 状态图支持
+\usetikzlibrary{arrows.meta} % 箭头
+\usetikzlibrary{shadows} % 阴影支持
+\usepackage{forest} % 画树
+
+\geometry{left = 1.5cm, right = 1.5cm, top=1.5cm, bottom=2cm}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{
+	backgroundcolor=\color{white}, 
+	%\tiny < \scriptsize < \footnotesize < \small < \normalsize < \large < \Large < \LARGE < \huge < \Huge
+	basicstyle = \footnotesize,       
+	breakatwhitespace = false,        
+	breaklines = true,                 
+	captionpos = b,                    
+	commentstyle = \color{mygreen}\bfseries,
+	extendedchars = false,
+	frame = shadowbox, 
+	framerule=0.5pt,
+	keepspaces=true,
+	keywordstyle=\color{blue}\bfseries, % keyword style
+	language = C++,                     % the language of code
+	otherkeywords={string}, 
+	numbers=left, 
+	numbersep=5pt,
+	numberstyle=\tiny\color{mygray},
+	rulecolor=\color{black},         
+	showspaces=false,  
+	showstringspaces=false, 
+	showtabs=false,    
+	stepnumber=1,         
+	stringstyle=\color{mymauve},        % string literal style
+	tabsize=4,          
+	title=\lstname           
+}
+
+%\sum\nolimits_{j=1}^{M}   上下标位于求和符号的水平右端，
+%\sum\limits_{j=1}^{M}   上下标位于求和符号的上下处，
+%\sum_{j=1}^{M}  对上下标位置没有设定，会随公式所处环境自动调整。
+
+%%%%%%%%%%%%%画图包%%%%%%%%%%%%%
+\usepackage{tikz}
+%%%%%%%%%%%%%好看的矩形%%%%%%%%%%%%%
+\tikzset{
+	rect1/.style = {
+		shape = rectangle,% 指定样式
+		minimum height=2cm,% 最小高度
+		minimum width=4cm,% 最小宽度
+		align = center,% 文字居中
+		drop shadow,% 阴影
+	}
+}
+%%%%%%%%%%%%%画图背景包%%%%%%%%%%%%%
+\usetikzlibrary{backgrounds}
+
+%%%%%%%%%%%%%在tikz中画一个顶点%%%%%%%%%%%%%
+%%%%%%%%%%%%%#1:node名称%%%%%%%%%%%%%
+%%%%%%%%%%%%%#2:位置%%%%%%%%%%%%%
+%%%%%%%%%%%%%#3:标签%%%%%%%%%%%%%
+\newcommand{\newVertex}[3]{\node[circle, draw=black, line width=1pt, scale=0.8] (#1) at #2{#3}}
+%%%%%%%%%%%%%在tikz中画一条边%%%%%%%%%%%%%
+\newcommand{\newEdge}[2]{\draw [black,very thick](#1)--(#2)}
+%%%%%%%%%%%%%在tikz中放一个标签%%%%%%%%%%%%%
+%%%%%%%%%%%%%#1:名称%%%%%%%%%%%%%
+%%%%%%%%%%%%%#2:位置%%%%%%%%%%%%%
+%%%%%%%%%%%%%#3:标签内容%%%%%%%%%%%%%
+\newcommand{\newLabel}[3]{\node[line width=1pt] (#1) at #2{#3}}
+
+%%%%%%%%%%%%%强制跳过一行%%%%%%%%%%%%%
+\newcommand{\jumpLine} {\hspace*{\fill} \par}
+%%%%%%%%%%%%%关键点指令,可用itemise替代%%%%%%%%%%%%%
+\newcommand{\keypoint}[2]{$\bullet$\textbf{#1}\quad#2\par}
+%%%%%%%%%%%%%<T>平均值表示%%%%%%%%%%%%%
+\newcommand{\average}[1]{\left\langle #1\right\rangle }
+%%%%%%%%%%%%%表格内嵌套表格%%%%%%%%%%%%%
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+%%%%%%%%%%%%%大黑点item头%%%%%%%%%%%%%
+\newcommand{\itemblt}{\item[$\bullet$]}
+%%%%%%%%%%%%%大圈item头%%%%%%%%%%%%%
+\newcommand{\itemc}{\item[$\circ$]}
+%%%%%%%%%%%%%大星星item头%%%%%%%%%%%%%
+\newcommand{\itembs}{\item[$\bigstar$]}
+%%%%%%%%%%%%%右▷item头%%%%%%%%%%%%%
+\newcommand{\itemrhd}{\item[$\rhd$]}
+%%%%%%%%%%%%%定义为%%%%%%%%%%%%%
+\newcommand{\defas}{=_{df}}
+%%%%%%%%%%%%%偏导%%%%%%%%%%%%%
+\newcommand{\partialx}[2]{\frac{\partial #1}{\partial #2}}
+%%%%%%%%%%%%%蕴含%%%%%%%%%%%%%
+\newcommand{\imp}{\rightarrow}
+%%%%%%%%%%%%%上取整%%%%%%%%%%%%%
+\newcommand{\ceil}[1]{\lceil#1\rceil}
+%%%%%%%%%%%%%下取整%%%%%%%%%%%%%
+\newcommand{\floor}[1]{\lfloor#1\rfloor}
+
+%%%%%%%%%%%%%双线分割线%%%%%%%%%%%%%
+\newcommand*{\doublerule}{\hrule width \hsize height 1pt \kern 0.5mm \hrule width \hsize height 2pt}
+%%%%%%%%%%%%%双线中间可加东西的分割线%%%%%%%%%%%%%
+\newcommand\doublerulefill{\leavevmode\leaders\vbox{\hrule width .1pt\kern1pt\hrule}\hfill\kern0pt }
+%%%%%%%%%%%%%左大括号%%%%%%%%%%%%%
+\newcommand{\leftbig}[1]{\left\{\begin{array}{l}#1\end{array}\right.}
+%%%%%%%%%%%%%矩阵%%%%%%%%%%%%%
+\newcommand{\mat}[2]{\left[\begin{array}{#1}#2\end{array}\right]}
+%%%%%%%%%%%%%可换行圆角文本框%%%%%%%%%%%%%
+\newcommand{\ovalboxn}[1]{\ovalbox{\tabincell{l}{#1}}}
+%%%%%%%%%%%%%设置section的counter, 使从1开始%%%%%%%%%%%%%
+\setcounter{section}{0}
+
+%%%%%%%%%%%%%Colors%%%%%%%%%%%%%
+\newcommand{\lightercolor}[3]{% Reference Color, Percentage, New Color Name
+	\colorlet{#3}{#1!#2!white}
+}
+\newcommand{\darkercolor}[3]{% Reference Color, Percentage, New Color Name
+	\colorlet{#3}{#1!#2!black}
+}
+\definecolor{aquamarine}{rgb}{0.5, 1.0, 0.83}
+\definecolor{Seashell}{RGB}{255, 245, 238} %背景色浅一点的
+\definecolor{Firebrick4}{RGB}{255, 0, 0}%文字颜色红一点的
+\lightercolor{gray}{20}{lgray}
+\newcommand{\hlg}[1]{
+	\begingroup
+	\sethlcolor{lgray}%背景色
+	\textcolor{black}{\hl{\mbox{#1}}}%textcolor里面对应文字颜色
+	\endgroup
+}
+\lightercolor{red}{20}{lred}
+\lightercolor{black}{20}{lblack}
+\lightercolor{black}{60}{mblack}
+
+\title{算法基础 HW5}
+\author{PB18111697 王章瀚}
+
+\begin{document}
+\maketitle
+\section{}
+\noindent \textbf{使用链表表示和加权合并启发式策略，写出{\sc Make-Set}, {\sc Find-Set}和{\sc Union}操作的伪代码}\\
+\jumpLine
+\noindent 详细说明已经注释清楚, 就不再赘述了.\\
+\begin{minipage}{\linewidth*5/7}
+	\begin{algorithm}[H]
+		\caption{链表表示和加权合并启发式策略的不相交集——{\sc Make-Set}}
+		\begin{algorithmic}[1] %每行显示行号
+		\Function {\sc Make-Set}{int key}
+			\State node = new Node
+			\State disjset = new DisjSet
+			\State node.key = key
+			\State node.set = list \Comment{该结点的所属集合指向该链表}
+			\State disjset.head = node
+			\State disjset.tail = node \Comment{链表头尾指向该结点}
+			\State disjset.size = 1
+			\State \Return{disjset}
+		\EndFunction
+		\end{algorithmic}
+	\end{algorithm}
+		
+	\begin{algorithm}[H]
+		\caption{链表表示和加权合并启发式策略的不相交集——{\sc Find-Set}}
+		\begin{algorithmic}[1] %每行显示行号
+		\Function {\sc Find-Set}{x}
+			\State \Return{x.set} \Comment{直接返回其对应集合}
+		\EndFunction
+		\end{algorithmic}
+	\end{algorithm}
+		
+	\begin{algorithm}[H]
+		\caption{链表表示和加权合并启发式策略的不相交集——{\sc Union}}
+		\begin{algorithmic}[1] %每行显示行号
+		\Function {\sc Union}{disjset1, disjset2}
+			\If {disjset1.size < disjset2.size}
+				\State {\sc Swap}(disjset1, disjset2) \Comment{启发式: 保证disjset1大小比较小}
+			\EndIf
+			\For{node in disjset2} \Comment{将disjset2的结点的集合改为disjset1}
+				\State node.set = disjset1
+			\EndFor
+			\State disjset1.tail.next = disjset2.head
+			\State disjset1.tail = disjset2.tail \Comment{将disjset2的结点加入disjset1}
+			\State disjset2.head = zdisjset2.tail = NULL \Comment{清空disjset2}
+			\State disjset1.size = disjset1.size + disjset2.size \Comment{更新disjset1大小}
+			\State disjset2.size = 0 \Comment{更新disjset2大小}
+		\EndFunction
+		\end{algorithmic}
+	\end{algorithm}
+\end{minipage}
+
+\newpage
+\section{}
+\textbf{设定动态规划算法求解0-1背包问题，要求运行时间为O(nW),n为商品数量，W是小偷能放进背包的最大商品总重量}\\
+\begin{minipage}{\linewidth*6/7}
+	\begin{algorithm}[H]
+		\caption{0-1背包问题}
+		\begin{algorithmic}[1] %每行显示行号
+		\Require weight: 重量数组, value: 价值数组, n: 数目, W: 背包最大重
+		\Function {\sc Package01}{weight, value, n, W}
+			\State r = new array[W] \Comment{r[i]表示大小为r[i]的包最大价值}
+			\For{i = 1 $\to$ W} \Comment{放第0个物品}
+				\State r[i] = weight[0] $\le$ i ? value[0] : 0 \Comment{当放得下物品i的时候才放}
+			\EndFor
+			\For{i = 1 $\to$ n-1} \Comment{考虑1-n的每个物品是否放}
+				\For{j = W $\to$ weight[i]} \Comment{考虑所有能放下物品i的包大小}
+					\State r[j] = $\max$(r[j], r[j-weight[i]]+value[i]) \Comment{当取了总价值能变大才取}
+				\EndFor
+			\EndFor
+			\Return r[W] \Comment{返回最大总价值}
+		\EndFunction
+		\end{algorithmic}
+	\end{algorithm}
+\end{minipage}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,478 @@
+\documentclass[UTF8]{article}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{makecell}
+\usepackage[utf8]{inputenc}
+\usepackage[space]{ctex} %中文包
+\usepackage{listings} %放代码
+\usepackage{xcolor} %代码着色宏包
+\usepackage{CJK} %显示中文宏包
+\usepackage{float}
+\usepackage{diagbox}
+\usepackage{bm}
+\usepackage{ulem} 
+\usepackage{amssymb}
+\usepackage{soul}
+\usepackage{color}
+\usepackage{geometry}
+\usepackage{fancybox} %花里胡哨的盒子
+\usepackage{xhfill} %填充包, 可画分割线 https://www.latexstudio.net/archives/8245
+\usepackage{multicol} %多栏包
+\usepackage{enumerate} %可以方便地自定义枚举标题
+\usepackage{multirow} %表格中多行单元格合并
+\usepackage{wasysym} %可以使用wasysym里的一堆奇奇怪怪的符号
+\usepackage{hyperref} % url
+%%%%%%%%%%%%%%%伪代码%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+%%%%%%%%%%%%%%%画图包%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usepackage{pgfplots} % http://pgfplots.sourceforge.net/gallery.html
+\usetikzlibrary{pgfplots.patchplots} % 拟合支持
+\usetikzlibrary{arrows,shapes,automata,petri,positioning,calc} % 状态图支持
+\usetikzlibrary{arrows.meta} % 箭头
+\usetikzlibrary{shadows} % 阴影支持
+\usepackage{forest} % 画树
+\usepackage{adjustbox} % 旋转
+
+\geometry{left = 1.5cm, right = 1.5cm, top=1.5cm, bottom=2cm}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{
+	backgroundcolor=\color{white}, 
+	%\tiny < \scriptsize < \footnotesize < \small < \normalsize < \large < \Large < \LARGE < \huge < \Huge
+	basicstyle = \footnotesize,       
+	breakatwhitespace = false,        
+	breaklines = true,                 
+	captionpos = b,                    
+	commentstyle = \color{mygreen}\bfseries,
+	extendedchars = false,
+	frame = shadowbox, 
+	framerule=0.5pt,
+	keepspaces=true,
+	keywordstyle=\color{blue}\bfseries, % keyword style
+	language = C++,                     % the language of code
+	otherkeywords={string}, 
+	numbers=left, 
+	numbersep=5pt,
+	numberstyle=\tiny\color{mygray},
+	rulecolor=\color{black},         
+	showspaces=false,  
+	showstringspaces=false, 
+	showtabs=false,    
+	stepnumber=1,         
+	stringstyle=\color{mymauve},        % string literal style
+	tabsize=4,          
+	title=\lstname           
+}
+
+%\sum\nolimits_{j=1}^{M}   上下标位于求和符号的水平右端, 
+%\sum\limits_{j=1}^{M}   上下标位于求和符号的上下处, 
+%\sum_{j=1}^{M}  对上下标位置没有设定, 会随公式所处环境自动调整. 
+
+%%%%%%%%%%%%%画图包%%%%%%%%%%%%%
+\usepackage{tikz}
+%%%%%%%%%%%%%好看的矩形%%%%%%%%%%%%%
+\tikzset{
+	rect1/.style = {
+		shape = rectangle,% 指定样式
+		minimum height=2cm,% 最小高度
+		minimum width=4cm,% 最小宽度
+		align = center,% 文字居中
+		drop shadow,% 阴影
+	}
+}
+%%%%%%%%%%%%%画图背景包%%%%%%%%%%%%%
+\usetikzlibrary{backgrounds}
+
+%%%%%%%%%%%%%在tikz中画一个顶点%%%%%%%%%%%%%
+%%%%%%%%%%%%%#1:node名称%%%%%%%%%%%%%
+%%%%%%%%%%%%%#2:位置%%%%%%%%%%%%%
+%%%%%%%%%%%%%#3:标签%%%%%%%%%%%%%
+\newcommand{\newVertex}[3]{\node[circle, draw=black, line width=1pt, scale=0.8] (#1) at #2{#3}}
+%%%%%%%%%%%%%在tikz中画一条边%%%%%%%%%%%%%
+\newcommand{\newEdge}[2]{\draw [black,very thick](#1)--(#2)}
+%%%%%%%%%%%%%在tikz中放一个标签%%%%%%%%%%%%%
+%%%%%%%%%%%%%#1:名称%%%%%%%%%%%%%
+%%%%%%%%%%%%%#2:位置%%%%%%%%%%%%%
+%%%%%%%%%%%%%#3:标签内容%%%%%%%%%%%%%
+\newcommand{\newLabel}[3]{\node[line width=1pt] (#1) at #2{#3}}
+
+%%%%%%%%%%%%%强制跳过一行%%%%%%%%%%%%%
+\newcommand{\jumpLine} {\hspace*{\fill} \\}
+%%%%%%%%%%%%%关键点指令,可用itemise替代%%%%%%%%%%%%%
+\newcommand{\keypoint}[2]{$\bullet$\textbf{#1}\quad#2\par}
+%%%%%%%%%%%%%<T>平均值表示%%%%%%%%%%%%%
+\newcommand{\average}[1]{\left\langle #1\right\rangle }
+%%%%%%%%%%%%%表格内嵌套表格%%%%%%%%%%%%%
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+%%%%%%%%%%%%%大黑点item头%%%%%%%%%%%%%
+\newcommand{\itemblt}{\item[$\bullet$]}
+%%%%%%%%%%%%%大圈item头%%%%%%%%%%%%%
+\newcommand{\itemc}{\item[$\circ$]}
+%%%%%%%%%%%%%大星星item头%%%%%%%%%%%%%
+\newcommand{\itembs}{\item[$\bigstar$]}
+%%%%%%%%%%%%%右▷item头%%%%%%%%%%%%%
+\newcommand{\itemrhd}{\item[$\rhd$]}
+%%%%%%%%%%%%%定义为%%%%%%%%%%%%%
+\newcommand{\defas}{=_{df}}
+%%%%%%%%%%%%%偏导%%%%%%%%%%%%%
+\newcommand{\partialx}[2]{\frac{\partial #1}{\partial #2}}
+%%%%%%%%%%%%%蕴含%%%%%%%%%%%%%
+\newcommand{\imp}{\rightarrow}
+%%%%%%%%%%%%%上取整%%%%%%%%%%%%%
+\newcommand{\ceil}[1]{\lceil#1\rceil}
+%%%%%%%%%%%%%下取整%%%%%%%%%%%%%
+\newcommand{\floor}[1]{\lfloor#1\rfloor}
+
+%%%%%%%%%%%%%双线分割线%%%%%%%%%%%%%
+\newcommand*{\doublerule}{\hrule width \hsize height 1pt \kern 0.5mm \hrule width \hsize height 2pt}
+%%%%%%%%%%%%%双线中间可加东西的分割线%%%%%%%%%%%%%
+\newcommand\doublerulefill{\leavevmode\leaders\vbox{\hrule width .1pt\kern1pt\hrule}\hfill\kern0pt }
+%%%%%%%%%%%%%左大括号%%%%%%%%%%%%%
+\newcommand{\leftbig}[1]{\left\{\begin{array}{l}#1\end{array}\right.}
+%%%%%%%%%%%%%矩阵%%%%%%%%%%%%%
+\newcommand{\mat}[2]{\left[\begin{array}{#1}#2\end{array}\right]}
+%%%%%%%%%%%%%可换行圆角文本框%%%%%%%%%%%%%
+\newcommand{\ovalboxn}[1]{\ovalbox{\tabincell{l}{#1}}}
+%%%%%%%%%%%%%设置section的counter, 使从1开始%%%%%%%%%%%%%
+\setcounter{section}{0}
+
+%%%%%%%%%%%%%Colors%%%%%%%%%%%%%
+\newcommand{\lightercolor}[3]{% Reference Color, Percentage, New Color Name
+	\colorlet{#3}{#1!#2!white}
+}
+\newcommand{\darkercolor}[3]{% Reference Color, Percentage, New Color Name
+	\colorlet{#3}{#1!#2!black}
+}
+\definecolor{aquamarine}{rgb}{0.5, 1.0, 0.83}
+\definecolor{Seashell}{RGB}{255, 245, 238} %背景色浅一点的
+\definecolor{Firebrick4}{RGB}{255, 0, 0}%文字颜色红一点的
+\lightercolor{gray}{20}{lgray}
+\newcommand{\hlg}[1]{
+	\begingroup
+	\sethlcolor{lgray}%背景色
+	\textcolor{black}{\hl{\mbox{#1}}}%textcolor里面对应文字颜色
+	\endgroup
+}
+\lightercolor{red}{20}{lred}
+\lightercolor{black}{20}{lblack}
+\lightercolor{black}{60}{mblack}
+
+\title{算法基础 HW6}
+\author{PB18111697 王章瀚}
+
+\begin{document}
+\maketitle
+\section{}
+\noindent \textbf{我们对钢条切割问题进行一点修改, 除了切割下的钢条段具有不同价格$p_i$外, 每次切割还要付出固定的成本$c$. 这样, 切割方案的收益就等于钢条段的价格之和减去切割的成本. 设计一个动态规划算法解决修改后的钢条切割问题.}
+
+\begin{minipage}{\linewidth*6/7}
+	\begin{algorithm}[H]
+		\caption{考虑切割成本的钢条切割问题}
+		\begin{algorithmic}[1] %每行显示行号
+			\Require 长度为 $i$ 的钢条价格为 $p_i$, 每次切割有固定成本 $c$, 钢管长度为 $n$
+			\Function {\sc Bottom-Up-Cut-Rod}{p, c}
+			\State let r[0..n] be a new array
+			\State $r[0]=0$
+			\For{$j = 1 \to n$}
+				\State $q=-\infty$
+				\For{$i = 1 \to j$}
+					\State $q=\max(q,p[i]+r[j-i]-c)$ \Comment{固定成本 $c$ 在这里被考虑}
+				\EndFor
+				\State r[j]=q
+			\EndFor
+			\State \textbf{return} $r[n]$
+			\EndFunction
+		\end{algorithmic}
+	\end{algorithm}
+\end{minipage}
+
+\newpage
+\section{}
+\noindent \textbf{给定一个有向无环图 $G=(V;E)$, 边权重为实数, 给定图中两个顶点 $s$ 和 $t$. 设计动态规划算法, 求从 $s$ 到 $t$ 的最长加权简单路径.}
+
+\noindent 这里我们显然有: 如果某结点 $v$ 是该路径上的, 那么沿着这个路径, $s$ 到 $v$ 和 $v$ 到 $t$ 也分别是最长加权简单路径. 否则一旦有更长的, 换上去就行了. \\
+这是因为这个更长$v\rightsquigarrow_{new} t$ (或 $s\rightsquigarrow_{new} v$)的显然不会经过 $s\rightsquigarrow v$ (或$v\rightsquigarrow t$)上的顶点.3 \\
+假设经过, 比如是 $s \rightsquigarrow_{new}v$ 经过了 $v\rightsquigarrow t$ 上的顶点$\omega$, 那么就有$\omega\rightsquigarrow_{new} v$ 和 $v\rightsquigarrow \omega$, 这样一来就构成了环, 与题设矛盾. 另一种情况同理.\\
+故确实可以利用上述思想做动态规划.\\
+\begin{minipage}{\linewidth*6/7}
+	\begin{algorithm}[H]
+		\caption{有向无环图的最长加权简单路径}
+		\begin{algorithmic}[1] %每行显示行号
+			\Require 给定有向无环图$G=(V,E)$, 两个顶点$s$, $t$
+			\Function {\sc Longest-Weighted-Path}{V, E, s, t}
+				\For {$v$ in $V$}
+					\State $v.val=-\infty$
+					\State $v.last = NULL$
+				\EndFor
+				\State $s.val = 0$
+				\State let $S = \{s\}$
+				\While{$S$ is not $\varnothing$}
+					\For{$v$ in $S$}
+						\State $S = S/\{v\}$
+						\For {$w$ in $v.to\_list$}
+							\If{$w.val < edge(v,w).weight + v.val$}
+								\State $w.val = edge(v,w).weight + v.val$
+								\State $w.from = v$
+							\EndIf
+							\State $S = S\cup \{w\}$
+						\EndFor
+					\EndFor
+				\EndWhile
+				\State let $path$ = a list
+				\State $v = t$
+				\While{$v is not NULL$}
+					\State path.insert(v, path.begin) \Comment 把 $v$ 插入列表首部
+					\State $v = v.last$
+				\EndWhile
+				\State \textbf{return} path
+				
+			\EndFunction
+		\end{algorithmic}
+	\end{algorithm}
+\end{minipage}
+
+\newpage
+\section{}
+\noindent \textbf{在最优二叉搜索树问题中, 若给定7个关键字的概率如下所示, 求其最优二叉搜索树的结构和代价.(p, q定义和课本相同)}
+\begin{center}
+	\begin{tabular}{c|c|c|c|c|c|c|c|c}
+		i & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+		\hline
+		$p_i$ &  & 0.04 & 0.06 & 0.08 & 0.02 & 0.10 & 0.12 & 0.14 \\
+		$q_i$ & 0.06 & 0.06 & 0.06 & 0.06 & 0.05 & 0.05 & 0.05 & 0.05 \\
+	\end{tabular}
+\end{center}
+\noindent 首先可以画出以下三个表:
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|}
+	\diagbox{j}{w}{i}&1&2&3&4&5&6&7&8\\
+	\cline{0-8}
+	7 & 1.0 & 0.90 & 0.78 & 0.64 & 0.56 & 0.41 & 0.24 & 0.05\\
+	\cline{0-8}
+	6 & 0.81 & 0.71 & 0.59 & 0.45 & 0.37 & 0.22 & 0.05\\
+	\cline{0-7}
+	5 & 0.64 & 0.54 & 0.42 & 0.28 & 0.20 & 0.05\\
+	\cline{0-6}
+	4 & 0.49 & 0.39 & 0.27 & 0.13 & 0.05\\
+	\cline{0-5}
+	3 & 0.42 & 0.32 & 0.20 & 0.06\\
+	\cline{0-4}
+	2 & 0.28 & 0.18 & 0.06\\
+	\cline{0-3}
+	1 & 0.16 & 0.06\\
+	\cline{0-2}
+	0 & 0.06\\
+	\cline{0-1}
+\end{tabular}
+\end{center}
+\begin{minipage}{\linewidth*2/3}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|}
+\diagbox{j}{e}{i}&1&2&3&4&5&6&7&8\\
+\cline{0-8}
+7 & 3.12 & 2.61 & 2.12 & 1.55 & 1.20 & 0.78 & 0.34 & 0.05\\
+\cline{0-8}
+6 & 2.44 & 1.96 & 1.48 & 1.01 & 0.72 & 0.32 & 0.05\\
+\cline{0-7}
+5 & 1.83 & 1.41 & 1.04 & 0.57 & 0.30 & 0.05\\
+\cline{0-6}
+4 & 1.34 & 0.93 & 0.57 & 0.24 & 0.05\\
+\cline{0-5}
+3 & 1.02 & 0.68 & 0.32 & 0.06\\
+\cline{0-4}
+2 & 0.62 & 0.30 & 0.06\\
+\cline{0-3}
+1 & 0.28 & 0.06\\
+\cline{0-2}
+0 & 0.06\\
+\cline{0-1}
+\end{tabular}
+\end{minipage}
+\begin{minipage}{\linewidth/3}
+\begin{tabular}{c|c|c|c|c|c|c|c|}
+	\diagbox{j}{root}{i}&1&2&3&4&5&6&7\\
+	\cline{0-7}
+	7 & 5 & 5 & 5 & 6 & 6 & 7 & 7\\
+	\cline{0-7}
+	6 & 3 & 5 & 5 & 5 & 6 & 6\\
+	\cline{0-6}
+	5 & 3 & 3 & 4 & 5 & 5\\
+	\cline{0-5}
+	4 & 2 & 3 & 3 & 4\\
+	\cline{0-4}
+	3 & 2 & 3 & 3\\
+	\cline{0-3}
+	2 & 2 & 2\\
+	\cline{0-2}
+	1 & 1\\
+	\cline{0-1}
+\end{tabular}
+\end{minipage}
+\jumpLine
+\noindent从而能够得出最优二叉搜索树:
+\begin{center}
+\begin{forest}
+	[5
+		[2
+			[1
+				[$d_0$]
+				[$d_1$]
+			]
+			[3
+				[$d_2$]
+				[4
+					[$d_3$]
+					[$d_4$]
+				]
+			]
+		]
+		[7
+			[6
+				[$d_5$]
+				[$d_6$]
+			]
+			[$d_7$]
+		]
+	];
+\end{forest}
+\end{center}
+其代价即为 $e[1,7]=3.12$
+
+\newpage
+\section{}
+\noindent \textbf{一位公司主席正在向Stewart教授咨询公司聚会方案. 公司的内部结构关系是层次化的, 即员工按主管-下属关系构成一棵树, 根结点为公司主席. 人事部按"宴会交际能力"为每个员工打分, 分值为实数. 为了使所有参加聚会的员工都感到愉快, 主席不希望员工及其直接主管同时出席. \\
+公司主席向Stewart教授提供公司结构树, 采用左孩子右兄弟表示法(参见课本10.4节)描述. 每个节点除了保存指针外, 还保存员工的名字和宴会交际评分. 设计算法, 求宴会交际评分之和最大的宾客名单. 分析算法复杂度. }
+\jumpLine
+\jumpLine
+采用动态规划的思想, 如果最优方案选中了 $x$, 那么其所有孙子(因为孩子不会被选)的选择情况将也是最优的, 否则通过替换即可得到更优解.\\
+\noindent因此如果令 $r[x]$ 表示以 $x$ 为根的子树能够构成的最佳宴会名单对应的评分和, 那么就有
+$$\mbox{若不邀请x: }r_0[x]=\max\left\{\begin{array}{l}
+	\sum\limits_{\mbox{\tiny y in x.children}}r_0[y]\\
+	\sum\limits_{\mbox{\tiny y in x.grandchildren}}r_0[y]
+\end{array}\right.$$
+$$\mbox{若邀请x: }r_1[x]=x.score+\sum\limits_{\mbox{\tiny y in x.grandchildren}}r_0[y]$$
+
+\noindent 因此可以写出相应算法\footnote{参考自\url{https://blog.csdn.net/yangtzhou/article/details/84305563}}:\\
+其通过自上而下递归遍历结点, 且若遇到已经算完的情况就能自动返回(动态规划的关键), 并且最后计算出名单只需要遍历一遍, 因此\textbf{复杂度是 $\Theta(n)$}.\\
+\textbf{具体算法见下页}\\
+\begin{minipage}{\linewidth*7/7}
+	\begin{algorithm}[H]
+		\caption{宴会邀请}
+		\begin{algorithmic}[1] %每行显示行号
+			\Require 员工结构树 $T$, 返回显示是否被邀请的表 $guests$
+			\Function {\sc Best-Invitation}{$T$} \Comment{此后, 把 $guest$ 中被邀请者提取即为名单}
+			\State $r_0$, $r_1$ 为结点到 $r$ 值的表, 其初始值均为 $-\infty$
+			\State $guest$ 指示是否被邀请, 初值为 $False$
+			\State {\sc Best-Invitation}($T, r_0, r_1, guests$)
+			\If{$r_0[T]>r_1[T]$}
+				\State $guests[T]=False$
+				\State \Return $r_0[T], guests$
+			\Else
+				\State $guests[T]=True$
+				\State \Return $r_1[T], guests$
+			\EndIf
+			\EndFunction
+			\State
+			\Function {\sc Best-Invitation-Sub}{$T, \&r_0, \&r_1, \&guests$}
+			\If{$T$ is NULL}
+				\State \Return 
+			\EndIf
+			\If{$r_0[T] != \infty$} \Comment{已经算过}
+				\State \Return
+			\EndIf
+			\State children = T.children
+			\State $r_0[T]=0$
+			\State $r_1[T]=T.score$
+			\For{x in children}
+				\State {\sc Best-Invitation}($x, r_0, r_1, guests$)
+				\If{$r_0[x]>r_1[x]$} \Comment{不邀请 $T$ 的情况下, 邀请了 $x$ 能得到更好的结果}
+					\State $r_0[T] += r_0[x]$
+				\Else \Comment{不邀请 $T$ 的情况下, 不邀请 $x$ 能得到更好的结果}
+					\State $r_0[T] += r_1[x]$
+				\EndIf
+				\State $r_1[T] += T.score + r_0[x]$  \Comment{邀请 $T$ 的情况下, 只要直接加上不邀请孩子 $x$ 的 $r$ 值即可}
+			\EndFor
+			\If{$r_0[T]>r_1[T]$}
+				\State $guests[T]=False$
+			\Else
+				\State $guests[T]=True$
+			\EndIf
+			\EndFunction
+		\end{algorithmic}
+	\end{algorithm}
+\end{minipage}
+
+\newpage 
+\section{}
+\textbf{设计一个高效的算法, 对实数线上给定的一个点集$\{x_1,x_2,\cdots,x_n\}$, 求一个单位长度闭区间的集合, 包含所有给定的点, 并要求此集合最小. 证明你的算法是正确的.}\\
+\jumpLine
+
+\noindent \textbf{首先给出算法}: 
+\begin{center}
+\begin{enumerate}[1. ]
+	\item 将点集排序得到列表 $X$, 初始化区间集合为 $sections = \varnothing$
+	\item 取 $X$ 中最小元 $x_i$, 并取区间 $s = [x_i, x_i+1]$\\
+	将 $X$ 中落在区间 $s$ 中的点去掉, 并令 $sections = sections\cup s$
+	\item 如果 $X\not=\varnothing$, 继续执行第 2 步, 否则进入 第4步
+	\item 此时区间集合 $S$ 即为所求集合
+\end{enumerate}
+\end{center}
+\jumpLine
+\noindent \textbf{现在证明其正确性}:\\
+首先显然如果区间左端点不是点集中的点之一, 那么完全可以使之增大直到达到的第一个点, 这样只可能减小区间集合大小.\\
+其次, 在第一次进入第二步的时候, 不论如何一定要有一个区间包含第一个点$x_1$, 那么根据前述, 它必须是$[x_1,x_1+1]$, 此时显然可以不考虑落在该区间的点了. 然后重复地执行, 每次都是全局最优方案之选, 因此整个算法是正确的. 
+\hfill $\square$
+%首先显然如果区间左端点不是点集中的点之一, 那么完全可以使之增大直到达到的第一个点, 这样只可能减小区间集合大小.\\
+%既然如此, 不妨设 $S=\{[x_1,x_1+1],\cdots,[x_n,x_n+1]\}$, $\mathcal{I}=\{s|\mbox{s为S的任意区间互不相交的子集}\}$. \\
+%显然
+%\begin{enumerate}[1]
+%	\item 如果$B\in \mathcal{I}$ 且 $A\subset B$, 由于区间不相交集合的子集显然也区间不相交, 故$A\in \mathcal{I}$
+%	\item 对于任意 $A,B\in\mathcal{I}$且$|A|<|B|$, 则存在元素$x\in B-A$, 使得$A\cup \{x\}\in\mathcal{I}$, 因为$B\in \mathcal{I}$ 表明了在$[x_1,x_n+1]$里存在$|B|$个区间互不相交,
+%\end{enumerate}
+%故$M=(S,\mathcal{I})$ 满足拟阵性质.\\
+%而上述算法过程实际上就是拟阵的贪心算法过程, 因为它每次从 $M.S$ 中取了最小元尝试加入.\\
+%综上, 上述算法是正确的. 
+%\hfill $\square$
+
+\newpage
+\section{}
+\textbf{考虑用最少的硬币找n美分零钱的问题. 假定每种硬币的面额都是整数. 设计贪心算法求解找零问题, 假定有25美分, 10美分, 5美分和1美分四种面额的硬币. 证明你的算法能找到最优解.}\\
+\jumpLine
+\textbf{首先给出算法}:
+\begin{enumerate}[1. ]
+	\item 先选$a=n/25$个25美分硬币
+	\item 再选$b=(n-25*a)/10$个10美分硬币
+	\item 再选$c=(n-25*a-10*b)/5$个5美分硬币
+	\item 再选$(n-25*a-10*b-5*c)=d$ 个1美分硬币
+	\item 最终得到结果: a个25美分硬币, b 个10美分硬币, c个5美分硬币, d个1美分硬币
+\end{enumerate}
+\jumpLine
+\textbf{下面证明算法的最优性}:
+如果不是最优, 假设 $(a',b',c',d')$ 为一更优解,\\
+若$a'<a$, 则$(0,b',c',d')$的价值必然至少比$(0,b,c,d)$的刚好大$25*(a-a')$, 此时可以从中凑出 $(a-a')$个25, 显然这能够找出比$(a',b',c',d')$更小的结果.\\
+依此类推, 若$b'<b$, 若$c'<c$, 若$d'<d$均有类似结论.
+所以$a'\ge a$, $b'\ge b$, $c'\ge c$, $d'\ge d$, 因此$(a,b,c,d)$必然是最优解.\\
+\hfill$\square$
+
+%不妨设 n = 25a + 10b + 5c + d, 其中 a,b,c,d 为按上述算法计算的结果。
+%
+%若(a, b, c, d) 不为最优解，不妨设最优解为 (a', b', c', d'), 其中 $a \neq a'$. 则必有 $a > a'$, 故有 $25(a-a') = 10(b'-b) + 5(c'-c) + (d'-d) \Rightarrow \triangle_b + \triangle_c + \triangle_d > (a-a')$
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
