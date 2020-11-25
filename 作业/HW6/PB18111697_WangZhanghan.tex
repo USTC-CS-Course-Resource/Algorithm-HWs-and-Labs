@@ -315,7 +315,7 @@
 \end{tabular}
 \end{minipage}
 \jumpLine
-\noindent从而能够得出最优二叉搜索树:
+\noindent 从而能够得出最优二叉搜索树:
 \begin{center}
 \begin{forest}
 	[5
@@ -351,7 +351,7 @@
 \jumpLine
 \jumpLine
 采用动态规划的思想, 如果最优方案选中了 $x$, 那么其所有孙子(因为孩子不会被选)的选择情况将也是最优的, 否则通过替换即可得到更优解.\\
-\noindent因此如果令 $r[x]$ 表示以 $x$ 为根的子树能够构成的最佳宴会名单对应的评分和, 那么就有
+\noindent 因此如果令 $r[x]$ 表示以 $x$ 为根的子树能够构成的最佳宴会名单对应的评分和, 那么就有
 $$\mbox{若不邀请x: }r_0[x]=\max\left\{\begin{array}{l}
 	\sum\limits_{\mbox{\tiny y in x.children}}r_0[y]\\
 	\sum\limits_{\mbox{\tiny y in x.grandchildren}}r_0[y]
@@ -446,10 +446,10 @@ $$\mbox{若邀请x: }r_1[x]=x.score+\sum\limits_{\mbox{\tiny y in x.grandchildre
 \jumpLine
 \textbf{首先给出算法}:
 \begin{enumerate}[1. ]
-	\item 先选$a=n/25$个25美分硬币
-	\item 再选$b=(n-25*a)/10$个10美分硬币
-	\item 再选$c=(n-25*a-10*b)/5$个5美分硬币
-	\item 再选$(n-25*a-10*b-5*c)=d$ 个1美分硬币
+	\item 先选$a=\floor{n/25}$个25美分硬币
+	\item 再选$b=\floor{(n-25*a)/10}$个10美分硬币
+	\item 再选$c=\floor{(n-25*a-10*b)/5}$个5美分硬币
+	\item 再选$d=\floor{(n-25*a-10*b-5*c)}$ 个1美分硬币
 	\item 最终得到结果: a个25美分硬币, b 个10美分硬币, c个5美分硬币, d个1美分硬币
 \end{enumerate}
 \jumpLine
