@@ -1,0 +1,257 @@
+\documentclass[UTF8]{article}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{makecell}
+\usepackage[utf8]{inputenc}
+\usepackage[space]{ctex} %中文包
+\usepackage{listings} %放代码
+\usepackage{xcolor} %代码着色宏包
+\usepackage{CJK} %显示中文宏包
+\usepackage{float}
+\usepackage{diagbox}
+\usepackage{bm}
+\usepackage{ulem} 
+\usepackage{amssymb}
+\usepackage{soul}
+\usepackage{color}
+\usepackage{geometry}
+\usepackage{fancybox} %花里胡哨的盒子
+\usepackage{xhfill} %填充包, 可画分割线 https://www.latexstudio.net/archives/8245
+\usepackage{multicol} %多栏包
+\usepackage{enumerate} %可以方便地自定义枚举标题
+\usepackage{multirow} %表格中多行单元格合并
+\usepackage{wasysym} %可以使用wasysym里的一堆奇奇怪怪的符号
+\usepackage{hyperref} % url
+%%%%%%%%%%%%%%%伪代码%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+%%%%%%%%%%%%%%%画图包%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usepackage{pgfplots} % http://pgfplots.sourceforge.net/gallery.html
+\usetikzlibrary{pgfplots.patchplots} % 拟合支持
+\usetikzlibrary{arrows,shapes,automata,petri,positioning,calc} % 状态图支持
+\usetikzlibrary{arrows.meta} % 箭头
+\usetikzlibrary{shadows} % 阴影支持
+\usepackage{forest} % 画树
+\usepackage{adjustbox} % 旋转
+
+\geometry{left = 1.5cm, right = 1.5cm, top=1.5cm, bottom=2cm}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{
+	backgroundcolor=\color{white}, 
+	%\tiny < \scriptsize < \footnotesize < \small < \normalsize < \large < \Large < \LARGE < \huge < \Huge
+	basicstyle = \footnotesize,       
+	breakatwhitespace = false,        
+	breaklines = true,                 
+	captionpos = b,                    
+	commentstyle = \color{mygreen}\bfseries,
+	extendedchars = false,
+	frame = shadowbox, 
+	framerule=0.5pt,
+	keepspaces=true,
+	keywordstyle=\color{blue}\bfseries, % keyword style
+	language = C++,                     % the language of code
+	otherkeywords={string}, 
+	numbers=left, 
+	numbersep=5pt,
+	numberstyle=\tiny\color{mygray},
+	rulecolor=\color{black},         
+	showspaces=false,  
+	showstringspaces=false, 
+	showtabs=false,    
+	stepnumber=1,         
+	stringstyle=\color{mymauve},        % string literal style
+	tabsize=4,          
+	title=\lstname           
+}
+
+%\sum\nolimits_{j=1}^{M}   上下标位于求和符号的水平右端, 
+%\sum\limits_{j=1}^{M}   上下标位于求和符号的上下处, 
+%\sum_{j=1}^{M}  对上下标位置没有设定, 会随公式所处环境自动调整. 
+
+%%%%%%%%%%%%%画图包%%%%%%%%%%%%%
+\usepackage{tikz}
+%%%%%%%%%%%%%好看的矩形%%%%%%%%%%%%%
+\tikzset{
+	rect1/.style = {
+		shape = rectangle,% 指定样式
+		minimum height=2cm,% 最小高度
+		minimum width=4cm,% 最小宽度
+		align = center,% 文字居中
+		drop shadow,% 阴影
+	}
+}
+%%%%%%%%%%%%%画图背景包%%%%%%%%%%%%%
+\usetikzlibrary{backgrounds}
+
+%%%%%%%%%%%%%在tikz中画一个顶点%%%%%%%%%%%%%
+%%%%%%%%%%%%%#1:node名称%%%%%%%%%%%%%
+%%%%%%%%%%%%%#2:位置%%%%%%%%%%%%%
+%%%%%%%%%%%%%#3:标签%%%%%%%%%%%%%
+\newcommand{\newVertex}[3]{\node[circle, draw=black, line width=1pt, scale=0.8] (#1) at #2{#3}}
+%%%%%%%%%%%%%在tikz中画一条边%%%%%%%%%%%%%
+\newcommand{\newEdge}[2]{\draw [black,very thick](#1)--(#2)}
+%%%%%%%%%%%%%在tikz中放一个标签%%%%%%%%%%%%%
+%%%%%%%%%%%%%#1:名称%%%%%%%%%%%%%
+%%%%%%%%%%%%%#2:位置%%%%%%%%%%%%%
+%%%%%%%%%%%%%#3:标签内容%%%%%%%%%%%%%
+\newcommand{\newLabel}[3]{\node[line width=1pt] (#1) at #2{#3}}
+
+%%%%%%%%%%%%%强制跳过一行%%%%%%%%%%%%%
+\newcommand{\jumpLine} {\hspace*{\fill} \\}
+%%%%%%%%%%%%%关键点指令,可用itemise替代%%%%%%%%%%%%%
+\newcommand{\keypoint}[2]{$\bullet$\textbf{#1}\quad#2\par}
+%%%%%%%%%%%%%<T>平均值表示%%%%%%%%%%%%%
+\newcommand{\average}[1]{\left\langle #1\right\rangle }
+%%%%%%%%%%%%%表格内嵌套表格%%%%%%%%%%%%%
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+%%%%%%%%%%%%%大黑点item头%%%%%%%%%%%%%
+\newcommand{\itemblt}{\item[$\bullet$]}
+%%%%%%%%%%%%%大圈item头%%%%%%%%%%%%%
+\newcommand{\itemc}{\item[$\circ$]}
+%%%%%%%%%%%%%大星星item头%%%%%%%%%%%%%
+\newcommand{\itembs}{\item[$\bigstar$]}
+%%%%%%%%%%%%%右▷item头%%%%%%%%%%%%%
+\newcommand{\itemrhd}{\item[$\rhd$]}
+%%%%%%%%%%%%%定义为%%%%%%%%%%%%%
+\newcommand{\defas}{=_{df}}
+%%%%%%%%%%%%%偏导%%%%%%%%%%%%%
+\newcommand{\partialx}[2]{\frac{\partial #1}{\partial #2}}
+%%%%%%%%%%%%%蕴含%%%%%%%%%%%%%
+\newcommand{\imp}{\rightarrow}
+%%%%%%%%%%%%%上取整%%%%%%%%%%%%%
+\newcommand{\ceil}[1]{\lceil#1\rceil}
+%%%%%%%%%%%%%下取整%%%%%%%%%%%%%
+\newcommand{\floor}[1]{\lfloor#1\rfloor}
+
+%%%%%%%%%%%%%双线分割线%%%%%%%%%%%%%
+\newcommand*{\doublerule}{\hrule width \hsize height 1pt \kern 0.5mm \hrule width \hsize height 2pt}
+%%%%%%%%%%%%%双线中间可加东西的分割线%%%%%%%%%%%%%
+\newcommand\doublerulefill{\leavevmode\leaders\vbox{\hrule width .1pt\kern1pt\hrule}\hfill\kern0pt }
+%%%%%%%%%%%%%左大括号%%%%%%%%%%%%%
+\newcommand{\leftbig}[1]{\left\{\begin{array}{l}#1\end{array}\right.}
+%%%%%%%%%%%%%矩阵%%%%%%%%%%%%%
+\newcommand{\mat}[2]{\left[\begin{array}{#1}#2\end{array}\right]}
+%%%%%%%%%%%%%可换行圆角文本框%%%%%%%%%%%%%
+\newcommand{\ovalboxn}[1]{\ovalbox{\tabincell{l}{#1}}}
+%%%%%%%%%%%%%设置section的counter, 使从1开始%%%%%%%%%%%%%
+\setcounter{section}{0}
+
+%%%%%%%%%%%%%Colors%%%%%%%%%%%%%
+\newcommand{\lightercolor}[3]{% Reference Color, Percentage, New Color Name
+	\colorlet{#3}{#1!#2!white}
+}
+\newcommand{\darkercolor}[3]{% Reference Color, Percentage, New Color Name
+	\colorlet{#3}{#1!#2!black}
+}
+\definecolor{aquamarine}{rgb}{0.5, 1.0, 0.83}
+\definecolor{Seashell}{RGB}{255, 245, 238} %背景色浅一点的
+\definecolor{Firebrick4}{RGB}{255, 0, 0}%文字颜色红一点的
+\lightercolor{gray}{20}{lgray}
+\newcommand{\hlg}[1]{
+	\begingroup
+	\sethlcolor{lgray}%背景色
+	\textcolor{black}{\hl{\mbox{#1}}}%textcolor里面对应文字颜色
+	\endgroup
+}
+\lightercolor{red}{20}{lred}
+\lightercolor{black}{20}{lblack}
+\lightercolor{black}{60}{mblack}
+
+\title{算法基础 HW6}
+\author{PB18111697 王章瀚}
+
+\begin{document}
+\maketitle
+\section{}
+\noindent \textbf{假定我们对一个数据结构执行一个由 $n$ 个操作组成的操作序列, 当 $i$ 严格为 $2$ 的幂时, 第 $i$ 个操作的代价为 $i$, 否则代价为 $1$. 使用聚合分析确定每个操作的摊还代价.}\\
+\jumpLine
+可以考虑, $n$ 次执行需要代价为
+\begin{align*}
+n - \floor{\log_2 n} - 1 + \sum\limits_{k=0}^{\floor{\log_2 n}}2^k &=n - \floor{\log_2 n} - 1 + \frac{2^{\floor{\log_2 n}+1}-1}{2-1}\\
+&=n - \floor{\log_2 n} - 1 + 2^{\floor{\log_2 n}+1}-1\\
+&\le n - \floor{\log_2 n} - 2 + 2n\\
+&=3n-2-\floor{\log_2 n}\\
+&=O(n)
+ \end{align*}
+因此, 平均下来代价为:
+$$O(n)/n=O(1)$$
+\section{}
+\noindent \textbf{用核算法重做第一题}\\
+\jumpLine
+则此时需要赋予费用, 可以这样赋予:\\
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+第 $i$ 个操作 & 实际代价 & 摊还代价 \\
+\hline
+$i$ 不严格为 2 的幂 & 1 & 3 \\
+\hline
+$i=2^k$ & $i$ & 2\\
+\hline
+\end{tabular}
+\end{center}
+其意为: 每次执行一个非严格为2的幂的操作时, 除了自己的代价 1 外, 需要额外付出一个代价. 这样后面每当操作严格为 2 的幂的操作时, 前面必然已经累积了相应的摊还代价.\\
+具体而言, 假设第 $2^k$ 个操作完成后, 信用余额为2(包含了该操作的摊还代价), \\
+那么从第 $2^k+1$ 到第 $2^{k+1}-1$共有$(2^{k+1}-1) - (2^{k}+1) + 1=2^k-1$个实际代价为1的操作\\
+其总共需要支付$2^{k+1}-2$的摊还代价, 加上第 $2^{k+1}$ 个本身需要的2个代价单位, 总共就完成了对 $2^{k+1}$ 个实际代价的支付\\
+因此总有摊还代价为实际代价的上界.\\
+这样一来, 总的代价就是$O(3n)=O(n)$的, 因此平均来看, 自然是 $O(1)$的
+
+\section{}
+\noindent \textbf{用势能法重做第一题}\\
+\jumpLine
+定义第 $i$ 次操作后势能为 $\Phi(D_i)=2*(i-2^{\floor{\log_2 i}})$, 那么必然有 $\Phi(D_n)\ge\Phi(D_0)$\\
+此时若 $i$ 不严格为 2 的幂, 则总代价为
+$$\hat{c}_i=c_i+\Phi(D_i)-\Phi(D_{i-1})\le 1+2*1=3$$
+此时若 $i$ 严格为 2 的幂, 则总代价为
+$$\hat{c}_i=c_i+\Phi(D_i)-\Phi(D_{i-1})\le i+(0-(i-1-2^{\floor{\log_2 (i-1)}}))=i+(2-i)=2$$
+从而有$$\sum\limits_{i=0}^nc_i=\sum\limits_{i=0}^n\hat{c}_i-\Phi(D_n)+\Phi(D_0)\le\sum\limits_{i=0}^n\hat{c}_i\le3n$$
+因此, 总的n步摊还代价为 $O(n)$, 因此平均来看, 自然是 $O(1)$的.
+
+
+\section{}
+\noindent \textbf{我们将一维离散傅里叶变换推广到 $d$ 维上. 这时输入是一个 $d$ 维的数组 $A=(a_{j_1,j_2,\cdots,j_d})$, 维数分别为 $n_1,n_2,\cdots,n_d$, 其中 $n_1n_2\cdots n_d=n$, 定义 $d$ 维离散傅里叶变换如下:
+$$y_{k_1,k_2,\cdots,k_d}=\sum\limits_{j_1=0}^{n_1-1}\sum\limits_{j_2=0}^{n_2-1}\cdots\sum\limits_{j_d=0}^{n_d-1}a_{j_1,j_2,\cdots,j_d}\omega_{n_1}^{j_1k_1}\omega_{n_2}^{j_2k_2}\cdots\omega_{n_d}^{j_dk_d}$$
+其中 $0\le k_1< n_1,0\le k_2< n_2,\cdots 0\le k_d< n_d$}
+\subsection*{a}
+\noindent \textbf{证明: 我们可以依次在每个维度上计算一维的 DFT 来计算一个 $d$ 维的 DFT. 也就是说, 首先沿着第 1 维 $n/n_1$ 个独立的一维 DFT. 然后, 把沿着第 1 维的 DFT 结果作为输入, 我们计算沿着第 2 维的 $n/n_2$ 个独立的一维 DFT. 利用这个结果作为输入, 我们计算沿着第 3 维的 $n/n_3$ 个独立的一维 DFT. 如此下去直到第 d 维.}\\
+\jumpLine
+考虑恒等变换:
+\begin{align*}
+&\qquad y_{k_1,k_2,\cdots,k_d}=\sum\limits_{j_d=0}^{n_d-1}\sum\limits_{j_{d-1}=0}^{n_{d-1}-1}\cdots\sum\limits_{j_1=0}^{n_1-1}a_{j_1,j_2,\cdots,j_d}\omega_{n_d}^{j_dk_d}\omega_{n_{d-1}}^{j_{d-1}k_{d-1}}\cdots\omega_{n_1}^{j_1k_1}\\
+&=\sum\limits_{j_d=0}^{n_d-1}\sum\limits_{j_{d-1}=0}^{n_{d-1}-1}\cdots\sum\limits_{j_{2}=0}^{n_{2}-1}\omega_{n_d}^{j_dk_d}\omega_{n_{d-1}}^{j_{d-1}k_{d-1}}\cdots\omega_{n_{2}}^{j_{2}k_{2}}\sum\limits_{j_{1}=0}^{n_{1}-1}a_{j_1,j_2,\cdots,j_d}\omega_{n_1}^{j_1k_1}\\
+&=\cdots\\
+&=\sum\limits_{j_d=0}^{n_d-1}\omega_{n_d}^{j_dk_d}\sum\limits_{j_{d-1}=0}^{n_{d-1}-1}\omega_{n_{d-1}}^{j_{d-1}k_{d-1}}\cdots\sum\limits_{j_{2}=0}^{n_{2}-1}\omega_{n_{2}}^{j_{2}k_{2}}\sum\limits_{j_{1}=0}^{n_{1}-1}a_{j_1,j_2,\cdots,j_d}\omega_{n_1}^{j_1k_1}\\
+\end{align*}
+计算第一维时, 有 $n/n_1$ 个独立一维 DFT, 由此可以计算出 $y_{0,k_2,\cdots,k_d}, \cdots, y_{n_1-1,k_2,\cdots,k_d}$\\
+计算第二维的时候, 对每个第一维的结果要计算 $\frac{n}{n_1n_2}$ 个独立的一维DFT, 故总共要计算 $n/n_2$ 个.
+以此类推直到第 $d$ 维.
+因此, 我们确实可以按照题述方法来依次计算各维而得到最终 $d$ 维离散傅里叶变换的结果.
+\subsection*{b}
+\noindent \textbf{证明: 维度的次序并无影响. 于是可以通过在 $d$ 个维度的任意顺序中计算一维 DFT 来计算一个 $d$ 维的 DFT}\\
+\jumpLine
+按照原式, 由于求和号的上下界之间相互无依赖(如上题第一步), 因此可以互换顺序, 然后再按照第一题的拆解变换方法就能够得到不同顺序的计算方法, 因此维度的次序并无影响.
+\subsection*{c}
+\noindent \textbf{证明: 如果采用计算快速傅里叶变换计算每一个一维的 DFT, 那么计算一个 $d$ 维的 DFT 的总时间是 $O(n\lg n)$, 与 $d$ 无关.}\\
+\jumpLine
+每一个维度都是 $$\Theta(n_i\log n_i)$$
+故总的为$$\Theta(\sum\limits_{i=0}^dn_i\log n_i)$$
+其中有$$\sum\limits_{i=1}^dn_i\log n_i\le n\log n_i\le n\log\prod\limits_{i=1}^d=n\log n$$
+因此总时间为$O(n\log n)$, 与 $d$ 无关
+\end{document}
+
+
+
+
+
+
+
+
+
