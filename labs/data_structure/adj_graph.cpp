@@ -38,26 +38,30 @@ public:
         }
         nodes[s].d = 0;
     }
+
+    Node& operator[](int i) {
+        return nodes[i];
+    }
 };
 
 void dijkstra(AdjGraph& graph) {
     // set<Node*> s;
 
-    auto cmp = [](const Node *x, const Node *y)->bool{ return x->d > y->d; };
-    priority_queue<Node*, vector<Node*>, decltype(cmp)> q(cmp);
+    auto cmp = [&graph](const int &x, const int &y)->bool{ return graph[x].d > graph[y].d; };
+    priority_queue<int, vector<int>, decltype(cmp)> q(cmp);
     
     for (int i = 0; i < graph.n; i++) {
-        q.push(&graph.nodes[i]);
+        q.push(i);
     }
 
     while (!q.empty()) {
-        Node* u = q.top();
+        int u = q.top();
         q.pop();
         // s.insert(u);
-        for (auto edge: graph.nodes[u->id].adj) {
-            if (u->d + edge.w < graph.nodes[edge.j].d) {
-                graph.nodes[edge.j].d = u->d + edge.w;
-                q.push(&graph.nodes[edge.j]);
+        for (auto edge: graph[graph[u].id].adj) {
+            if (graph[u].d + edge.w < graph[edge.j].d) {
+                graph[edge.j].d = graph[u].d + edge.w;
+                q.push(edge.j);
             }
         }
     }

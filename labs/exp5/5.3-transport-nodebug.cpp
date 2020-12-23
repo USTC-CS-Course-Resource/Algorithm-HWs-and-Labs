@@ -61,9 +61,6 @@ public:
         int new_node_id = nodes.size();
         for (auto&& node: nodes) {
             for (auto&& edge: node.adj) {
-#ifdef DEBUG_SPLIT
-                printf("test %d -> %d, has reverse? %s\n", node.id+1, edge.j+1, get_edge(edge.j, node.id) != nullptr ? "true" : "false");
-#endif
                 if (node.id <= edge.j) {
                     // we don't care edge that edge.i < edge.j
                     new_graph[node.id].adj.push_back(Edge(node.id, edge.j, edge.w, 0, true));
@@ -137,9 +134,6 @@ public:
     int ford_fulkerson(int s, int t) {
         this->init_flow_to_zero();
         AdjGraph residual = residual_network();
-#ifdef DEBUG_2F
-        print(residual, "residual graph");
-#endif
         Path path = residual.get_path_dfs(s, t);
 
         while (!path.empty()) {
@@ -147,10 +141,6 @@ public:
             for (auto edge: path) {
                 cf = min(cf, edge.f);
             }
-#ifdef DEBUG_2F
-            print(path);
-            printf("\twith cf = %d\n", cf);
-#endif
             for (auto edge: path) {
                 Edge& target_edge = residual.get_real_edge(edge);
                 Edge& target_edge_reverse = residual.get_reverse_edge(edge);
@@ -158,53 +148,12 @@ public:
                 target_edge_reverse.f += cf;
             }
             path = residual.get_path_dfs(s, t);
-        }  
-#ifdef DEBUG_2F
-        print(residual, "residual graph");
-#endif
+        }
         int max_flow = 0;
         for (auto edge: residual[s].adj) {
             if (edge.real) max_flow += residual.get_reverse_edge(edge).f;
         }
         return max_flow;
-    }
-
-    void print(AdjGraph& graph, const string& name) {
-        cout << name << ":" << endl;
-        for (int i = 0; i < graph.nodes.size(); i++) {
-            printf("\tnode %d's adj: ", i+1);
-            for (auto edge: graph[i].adj) {
-                Edge& reverse = graph.get_reverse_edge(edge);
-                // printf("%d(w: %d, f: %d, %s, reverse: (%d -> %d)) ", edge.j+1, edge.w, edge.f, edge.real ? "real" : "fake", reverse.i+1, reverse.j+1);
-                printf("%d(w: %d, f: %d, %s) ", edge.j+1, edge.w, edge.f, edge.real ? "real" : "fake");
-            }
-            printf("\n");
-        }
-    }
-
-    void print(AdjGraph& graph) {
-        print(graph, "graph");
-    }
-
-    void print(const string& name) {
-        print(*this, name);
-    }
-
-    void print() {
-        print(*this);
-    }
-
-    void print(Path& path) {
-        printf("path: ");
-        if (path.empty()) {
-            printf("\n");
-            return;
-        }
-        printf("%d", path[0].i+1);
-        for (auto edge: path) {
-            printf(" --(w: %d, f: %d)-> %d", edge.w, edge.f, edge.j+1);
-        }
-        printf("\n");
     }
 };
 
@@ -225,15 +174,9 @@ int main() {
         if (edge != nullptr) edge->w += life;
         else graph[n1].adj.push_back(Edge(n1, n2, life, 0, true));
     }
-#ifdef DEBUG_SPLIT
-    graph.print("graph");
-#endif
 
     // split reverse parallel edge, to fit the conditions of 2F algorithm
     graph = graph.split_parallel_edge();
-#ifdef DEBUG_SPLIT
-    graph.print("graph");
-#endif
 
     // and now we can finnaly run 2F algorithm
     printf("%d\n", graph.ford_fulkerson(s, t));

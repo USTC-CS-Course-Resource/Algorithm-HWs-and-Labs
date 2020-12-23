@@ -28,36 +28,40 @@ public:
 
 class AdjGraph {
 public:
-    Node* nodes;
+    vector<Node> nodes;
     int n;
     AdjGraph(int n, int s): n(n) {
-        nodes = new Node[n];
+        nodes.resize(n);
         for (int i = 0; i < n; i++) {
             nodes[i].id = i;
             nodes[i].d = INT16_MAX;
         }
         nodes[s].d = 0;
     }
+
+    Node& operator[](int i) {
+        return nodes[i];
+    }
 };
 
 void dijkstra(AdjGraph& graph) {
     // set<Node*> s;
 
-    auto cmp = [](const Node *x, const Node *y)->bool{ return x->d > y->d; };
-    priority_queue<Node*, vector<Node*>, decltype(cmp)> q(cmp);
+    auto cmp = [&graph](const int &x, const int &y)->bool{ return graph[x].d > graph[y].d; };
+    priority_queue<int, vector<int>, decltype(cmp)> q(cmp);
     
     for (int i = 0; i < graph.n; i++) {
-        q.push(&graph.nodes[i]);
+        q.push(i);
     }
 
     while (!q.empty()) {
-        Node* u = q.top();
+        int u = q.top();
         q.pop();
         // s.insert(u);
-        for (auto edge: graph.nodes[u->id].adj) {
-            if (u->d + edge.w < graph.nodes[edge.j].d) {
-                graph.nodes[edge.j].d = u->d + edge.w;
-                q.push(&graph.nodes[edge.j]);
+        for (auto edge: graph[graph[u].id].adj) {
+            if (graph[u].d + edge.w < graph[edge.j].d) {
+                graph[edge.j].d = graph[u].d + edge.w;
+                q.push(edge.j);
             }
         }
     }
@@ -75,15 +79,15 @@ int main() {
         scanf("%d %d %d", &c1, &c2, &cost);
         assert(cost < INT16_MAX);
         c1--; c2--;
-        int adjsize = graph.nodes[c1].adj.size();
+        int adjsize = graph[c1].adj.size();
         int j = 0;
         for (j = 0; j < adjsize; j++) {
-            if (graph.nodes[c1].adj[j].j == c2) {
-                graph.nodes[c1].adj[j].w = min(graph.nodes[c1].adj[j].w, cost);
+            if (graph[c1].adj[j].j == c2) {
+                graph[c1].adj[j].w = min(graph[c1].adj[j].w, cost);
                 break;
             }
         }
-        if (j == adjsize) graph.nodes[c1].adj.push_back(Edge(c1, c2, cost));
+        if (j == adjsize) graph[c1].adj.push_back(Edge(c1, c2, cost));
     }
 
     dijkstra(graph);
