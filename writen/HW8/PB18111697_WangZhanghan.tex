@@ -1,0 +1,400 @@
+\documentclass[UTF8]{article}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{makecell}
+\usepackage[utf8]{inputenc}
+\usepackage[space]{ctex} %中文包
+\usepackage{listings} %放代码
+\usepackage{xcolor} %代码着色宏包
+\usepackage{CJK} %显示中文宏包
+\usepackage{float}
+\usepackage{diagbox}
+\usepackage{bm}
+\usepackage{ulem} 
+\usepackage{amssymb}
+\usepackage{soul}
+\usepackage{color}
+\usepackage{geometry}
+\usepackage{fancybox} %花里胡哨的盒子
+\usepackage{xhfill} %填充包, 可画分割线 https://www.latexstudio.net/archives/8245
+\usepackage{multicol} %多栏包
+\usepackage{enumerate} %可以方便地自定义枚举标题
+\usepackage{multirow} %表格中多行单元格合并
+\usepackage{wasysym} %可以使用wasysym里的一堆奇奇怪怪的符号
+\usepackage{hyperref} % url
+%%%%%%%%%%%%%%%伪代码%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+%%%%%%%%%%%%%%%画图包%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usepackage{pgfplots} % http://pgfplots.sourceforge.net/gallery.html
+\usetikzlibrary{pgfplots.patchplots} % 拟合支持
+\usetikzlibrary{arrows,shapes,automata,petri,positioning,calc} % 状态图支持
+\usetikzlibrary{arrows.meta} % 箭头
+\usetikzlibrary{shadows} % 阴影支持
+\usepackage{forest} % 画树
+\usepackage{adjustbox} % 旋转
+
+\geometry{left = 1.5cm, right = 1.5cm, top=1.5cm, bottom=2cm}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{
+	backgroundcolor=\color{white}, 
+	%\tiny < \scriptsize < \footnotesize < \small < \normalsize < \large < \Large < \LARGE < \huge < \Huge
+	basicstyle = \footnotesize,       
+	breakatwhitespace = false,        
+	breaklines = true,                 
+	captionpos = b,                    
+	commentstyle = \color{mygreen}\bfseries,
+	extendedchars = false,
+	frame = shadowbox, 
+	framerule=0.5pt,
+	keepspaces=true,
+	keywordstyle=\color{blue}\bfseries, % keyword style
+	language = C++,                     % the language of code
+	otherkeywords={string}, 
+	numbers=left, 
+	numbersep=5pt,
+	numberstyle=\tiny\color{mygray},
+	rulecolor=\color{black},         
+	showspaces=false,  
+	showstringspaces=false, 
+	showtabs=false,    
+	stepnumber=1,         
+	stringstyle=\color{mymauve},        % string literal style
+	tabsize=4,          
+	title=\lstname           
+}
+
+%\sum\nolimits_{j=1}^{M}   上下标位于求和符号的水平右端, 
+%\sum\limits_{j=1}^{M}   上下标位于求和符号的上下处, 
+%\sum_{j=1}^{M}  对上下标位置没有设定, 会随公式所处环境自动调整. 
+
+%%%%%%%%%%%%%画图包%%%%%%%%%%%%%
+\usepackage{tikz}
+%%%%%%%%%%%%%好看的矩形%%%%%%%%%%%%%
+\tikzset{
+	rect1/.style = {
+		shape = rectangle,% 指定样式
+		minimum height=2cm,% 最小高度
+		minimum width=4cm,% 最小宽度
+		align = center,% 文字居中
+		drop shadow,% 阴影
+	}
+}
+%%%%%%%%%%%%%画图背景包%%%%%%%%%%%%%
+\usetikzlibrary{backgrounds}
+
+%%%%%%%%%%%%%在tikz中画一个顶点%%%%%%%%%%%%%
+%%%%%%%%%%%%%#1:node名称%%%%%%%%%%%%%
+%%%%%%%%%%%%%#2:位置%%%%%%%%%%%%%
+%%%%%%%%%%%%%#3:标签%%%%%%%%%%%%%
+\newcommand{\newVertex}[3]{\node[circle, draw=black, line width=1pt, scale=0.8] (#1) at #2{#3}}
+%%%%%%%%%%%%%在tikz中画一条边%%%%%%%%%%%%%
+\newcommand{\newEdge}[2]{\draw [black,very thick](#1)--(#2)}
+%%%%%%%%%%%%%在tikz中放一个标签%%%%%%%%%%%%%
+%%%%%%%%%%%%%#1:名称%%%%%%%%%%%%%
+%%%%%%%%%%%%%#2:位置%%%%%%%%%%%%%
+%%%%%%%%%%%%%#3:标签内容%%%%%%%%%%%%%
+\newcommand{\newLabel}[3]{\node[line width=1pt] (#1) at #2{#3}}
+
+%%%%%%%%%%%%%强制跳过一行%%%%%%%%%%%%%
+\newcommand{\jumpLine} {\hspace*{\fill} \\}
+%%%%%%%%%%%%%关键点指令,可用itemise替代%%%%%%%%%%%%%
+\newcommand{\keypoint}[2]{$\bullet$\textbf{#1}\quad#2\par}
+%%%%%%%%%%%%%<T>平均值表示%%%%%%%%%%%%%
+\newcommand{\average}[1]{\left\langle #1\right\rangle }
+%%%%%%%%%%%%%表格内嵌套表格%%%%%%%%%%%%%
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+%%%%%%%%%%%%%大黑点item头%%%%%%%%%%%%%
+\newcommand{\itemblt}{\item[$\bullet$]}
+%%%%%%%%%%%%%大圈item头%%%%%%%%%%%%%
+\newcommand{\itemc}{\item[$\circ$]}
+%%%%%%%%%%%%%大星星item头%%%%%%%%%%%%%
+\newcommand{\itembs}{\item[$\bigstar$]}
+%%%%%%%%%%%%%右▷item头%%%%%%%%%%%%%
+\newcommand{\itemrhd}{\item[$\rhd$]}
+%%%%%%%%%%%%%定义为%%%%%%%%%%%%%
+\newcommand{\defas}{=_{df}}
+%%%%%%%%%%%%%偏导%%%%%%%%%%%%%
+\newcommand{\partialx}[2]{\frac{\partial #1}{\partial #2}}
+%%%%%%%%%%%%%蕴含%%%%%%%%%%%%%
+\newcommand{\imp}{\rightarrow}
+%%%%%%%%%%%%%上取整%%%%%%%%%%%%%
+\newcommand{\ceil}[1]{\lceil#1\rceil}
+%%%%%%%%%%%%%下取整%%%%%%%%%%%%%
+\newcommand{\floor}[1]{\lfloor#1\rfloor}
+
+%%%%%%%%%%%%%双线分割线%%%%%%%%%%%%%
+\newcommand*{\doublerule}{\hrule width \hsize height 1pt \kern 0.5mm \hrule width \hsize height 2pt}
+%%%%%%%%%%%%%双线中间可加东西的分割线%%%%%%%%%%%%%
+\newcommand\doublerulefill{\leavevmode\leaders\vbox{\hrule width .1pt\kern1pt\hrule}\hfill\kern0pt }
+%%%%%%%%%%%%%左大括号%%%%%%%%%%%%%
+\newcommand{\leftbig}[1]{\left\{\begin{array}{l}#1\end{array}\right.}
+%%%%%%%%%%%%%矩阵%%%%%%%%%%%%%
+\newcommand{\mat}[2]{\left[\begin{array}{#1}#2\end{array}\right]}
+%%%%%%%%%%%%%可换行圆角文本框%%%%%%%%%%%%%
+\newcommand{\ovalboxn}[1]{\ovalbox{\tabincell{l}{#1}}}
+%%%%%%%%%%%%%设置section的counter, 使从1开始%%%%%%%%%%%%%
+\setcounter{section}{0}
+
+%%%%%%%%%%%%%Colors%%%%%%%%%%%%%
+\newcommand{\lightercolor}[3]{% Reference Color, Percentage, New Color Name
+	\colorlet{#3}{#1!#2!white}
+}
+\newcommand{\darkercolor}[3]{% Reference Color, Percentage, New Color Name
+	\colorlet{#3}{#1!#2!black}
+}
+\definecolor{aquamarine}{rgb}{0.5, 1.0, 0.83}
+\definecolor{Seashell}{RGB}{255, 245, 238} %背景色浅一点的
+\definecolor{Firebrick4}{RGB}{255, 0, 0}%文字颜色红一点的
+\lightercolor{gray}{20}{lgray}
+\newcommand{\hlg}[1]{
+	\begingroup
+	\sethlcolor{lgray}%背景色
+	\textcolor{black}{\hl{\mbox{#1}}}%textcolor里面对应文字颜色
+	\endgroup
+}
+\lightercolor{red}{20}{lred}
+\lightercolor{black}{20}{lblack}
+\lightercolor{black}{60}{mblack}
+
+\title{算法基础 HW8}
+\author{PB18111697 王章瀚}
+
+\begin{document}
+\maketitle
+\section*{1.}
+\noindent \textbf{(欧拉回路) 强连通有向图 $G=(V,E)$ 中的一个欧拉回路是指一条遍历图 $G$ 中每条边恰好一次的环路. 不过这条环路可以多次访问一个结点.}
+\subsection*{a.}
+\noindent \textbf{证明: 图 $G$ 中有一条欧拉回路当且仅当对于图中的每个结点 $v$, 有 $in-degree(v)=out-degree(v)$.}\\
+\jumpLine
+(必要性)若有一条欧拉回路, 则该回路上的任意一个点相邻的边都分别为一个入边和一个出边, 此时, 对该点来说, 必然有 $in-degree(v)=out-degree(v)$\\
+而该性质对每个点都成立, 因此最后加起来仍然有 $in-degree(v)=out-degree(v)$.\\
+\jumpLine
+(充分性)若对每个点 $v$ 都有 $in-degree(v)=out-degree(v)$, 我们总是可以从一个点 $u$ 出发, 向任意的结点前进构造路径, 然后最终回到 $u$.\\
+否则, 假设构造的最长路径最终只能停在点 $v$, 则除了最后一次, 之前每次访问点 $v$ 之后必然从点 $v$ 出去, 那么 最后这次进入点 $v$, 其使用过的入边数量一定比使用过的出边数量多 1, 而根据 $in-degree(v)=out-degree(v)$, 我们知道我们还可以从 $v$ 出发, 接上下一个顶点, 构成更长的路径. 这就与假设矛盾.\\
+因此我们必然可以构造出一个欧拉回路.
+\hfill$\square$
+\subsection*{b.}
+\noindent \textbf{给出一个复杂度为 $O(E)$ 的算法来找出图 $G$ 的一条欧拉回路.}\\
+\jumpLine
+就如上面描述的, 只要当前结点有未使用的出边, 就走上去. 下面给出稍微严谨一点的说法:
+
+\begin{algorithm}[H]
+	\caption{{\sc Euler-Circuit}}
+	\begin{algorithmic}[1] %每行显示行号
+		\Require 图 $G=(V,E)$
+		\Function{Euler-Circuit}{G}
+		\State 任选起点 $u$, ($u$ 应至少有一出边)
+		\State $v=u$
+		\State 初始化路径 $path$
+		\While{$edge=v.$next\_out\_edge() $!=$ NULL} \Comment{这里 next\_out\_edge() 应当用 yield 之类的协程方式(如 python)实现, 以保证每次取到下一个}
+			\State $path$.append($edge$)
+			\State $v = edge.j$ \Comment{$edge.j$ 表示 $edge$ 指向的下一个顶点}
+		\EndWhile
+		\State \Return $path$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+由于每个边最多访问一次, 且整个过程以访问边为根据, 因此显然其时间复杂度恰为 $O(E)$.
+
+\newpage
+\section*{2.}
+\noindent \textbf{(套利交易) 套利交易指的是使用货币汇率之间的差异来将一个单位的货币转换为多于一个单位的同种货币的行为. 例如, 假定 1 美元可以购买 49 印度卢比, 1 印度卢比可以购买 2 日元, 1 日元可以购买 0.0107 美元. 那么通过在货币间进行转换, 一个交易商可以从 1 美元开始, 购买 49*2*0.0107=1.0486 美元, 从而获得 4.86\% 的利润.}\\
+\textbf{假定给定 $n$ 种货币, $c_1, c_2, \cdots, c_n$ 和一个 $n\times n$ 的汇率表 $R$, 一个单位的 $c_i$ 货币可以买 $R[i,j]$ 单位的 $c_j$ 货币.}
+\subsection*{a.}
+\noindent \textbf{给出一个有效的算法来判断是否存在一个货币序列 $\langle c_{i_1}, c_{i_2}, \cdots, c_{i_n}\rangle$, 使得}
+$$R[i_1,i_2]\cdot R[i_2,i_3] \cdot \cdots \cdot R[i_{k-1},i_k]\cdot R[i_k,i_1] > 1$$
+\textbf{请分析算法运行时间}\\
+\jumpLine
+不妨考虑取对数后的情景, 
+$$-\log R[i_1,i_2] - \log R[i_2,i_3] - \cdots - \log R[i_{k-1},i_k] - \log R[i_k,i_1] < 0$$
+也就是我们可以转换一下原表, 对原表 $R$ 的每个元素取负对数得到表 $Q$.\\
+然后以这些为该完全图的边权, 并运行一遍 Bellman-Ford 算法, 即可找到其中可能存在负环. 如果存在负环, 说明存在一个环使得上式成立, 那么也就是一个满足题意的环. 至于是否存在, 则可以直接由 Bellman-Ford 算法的返回值给出, 如果返回 true, 就存在, 返回 false 就不存在.\\
+显然, Bellman-Ford 算法的\underline{时间复杂度是 $O(VE)=O(V^3)$}(因为这里是完全图)\\
+下面是 Bellman-Ford 算法
+\begin{algorithm}[H]
+	\caption{{\sc Bellman-Ford}}
+	\begin{algorithmic}[1] %每行显示行号
+		\Require 图 $G=(V,E)$
+		\Require $w$ 为取了负对数的权重.
+		\Require $s$ 为起始点, 任选其一即可.
+		\Function{{\sc Bellman-Ford}}{$G$, $w$, $s$}
+		\State {\sc Initialize-Single-Source}($G$, $s$)
+		\For{$i$ = $1$ to $|G.V|-1$} \Comment{包括内层总共 $O(VE)$}
+			\For{each edge$(u,v)\in G.E$}
+				\State {\sc Relax}($u$, $v$, $w$)
+			\EndFor
+		\EndFor
+		\For{each edge$(u,v)\in G.E$}
+			\If{$v.d>u.d+w(u,v)$}
+			\State \Return true \Comment{表明存在负环, 即存在对应套利方法}
+			\EndIf
+		\EndFor
+		\State \Return false \Comment{表明不存在负环, 即不存在对应套利方法}
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+\subsection*{b.}
+\noindent \textbf{给出一个有效算法来打印出这样一个序列(如果存在这样一种序列), 分析算法的运行时间.}\\
+\jumpLine
+刚才 (a) 中的算法已经能确认是否有这样的序列了. 现在我们只要找出这样的序列. 根据前面的结果, 在运行完 Bellman-Ford 算法的第一步后, 如果有可以继续 {\sc Relax} 的边, 那么就说明图中存在有负环, 这时候, 必然还可以进行 {\sc Relax}. \\
+如果我们能够对所有可以 {\sc Relax} 的边进行再一个 {\sc Relax} 操作, 那么就可以更新负环上的边相应的顶点的 $d$ 值为更小的值. 此时, 倘若紧挨着的点也可以因为其前驱的更新而接着更新.
+\begin{itemize}
+\item 这句话听起来有点抽象, 举个例子: 比如一个环 $u\rightarrow v\rightarrow w\rightarrow u$, 那么这时候如果我因为 $(u,v)$ 满足了 {\sc Relax} 的条件 $v.d>u.d+w(u,v)$, 我就可以把 $v.d$ 更新为更小的 $u.d+w(u,v)$, 此时, 只需要再进行一轮更新, 就可以类似地把 $w.d$ 更新为更小的 $v.d+w(v,w)$, 再一轮, 可以把 $u.d$ 更新为更小的 $w.d+w(w,u)$. 
+\end{itemize}
+因此, 最多不超过 $|V|-1$ 轮的更新内, 我们可以遍历到某个环的所有边集.\\
+于是, 我们只需要把边集构造为一个图并找出一个环即可(DFS之类的, 不超过 $O(E+V)$), 乘上前面的 $O(EV)=O(V^3)$ 就会得到 $O(V^4)$, \underline{总的时间复杂度为 $O(V^4)$}(因为这里是完全图, $|E|=|V|^2$)\\
+下面是算法:
+\begin{algorithm}[H]
+	\caption{{\sc Bellman-Ford-Find-Neg-Circle}}
+	\begin{algorithmic}[1] %每行显示行号
+		\Require 图 $G=(V,E)$
+		\Require $w$ 为取了负对数的权重.
+		\Require $s$ 为起始点, 任选其一即可.
+		\Function{{\sc Bellman-Ford-Find-Neg-Circle}}{$G$, $w$, $s$}
+		\State {\sc Initialize-Single-Source}($G$, $s$)
+		\For{$i$ = $1$ to $|G.V|-1$} \Comment{包括内层总共 $O(VE)$}
+			\For{each edge$(u,v)\in G.E$}
+				\State {\sc Relax}($u$, $v$, $w$)
+			\EndFor
+		\EndFor
+		\For{each edge$(u,v)\in G.E$}
+			\If{$v.d>u.d+w(u,v)$}
+			\State goto {\sc Find-Neg-Circle} \Comment{表明存在负环, 即存在对应套利方法}
+			\EndIf
+		\EndFor
+		\State \Return false \Comment{表明不存在负环, 即不存在对应套利方法}
+		\State {\sc Find-Neg-Circle}:
+		\State 初始化可能的负环边集构成的图 $negG$ \Comment{其实维护过程中它一直是树, 因为一旦找到了环就退出}
+		\For{$i$ = $1$ to $|G.V|-1$} \Comment{这个外层循环一定不会超过 $|E|$ 次}
+			\For{each edge$(u,v)\in G.E$} \Comment{而内层循环是 $O(E)$ 的}
+				\State {\sc Relax}($u$, $v$, $w$)
+				\State $negG.add\_edge((u,v))$
+				\If{存在环} \Comment{$O(V+E)$}
+					\State \Return 返回这个环
+				\EndIf
+			\EndFor
+		\EndFor
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+%改进一下刚才的算法. 首先这要基于两币互换不会有任何改变(即 $R[i,j]\cdot R[j,i]=1$, 亦即 $Q[i,j]+Q[j,i]=w(i,j)+w(j,i)=0$)\\
+%然后我们只要把满足  $v.d>u.d+w(u,v)$ 的 $(u,v)$ 取出, 考虑 $path1 = s\rightsquigarrow u$ 和 $path2 = s\rightsquigarrow v$的反向路径, \\
+%这时由于有 $v.d>u.d+w(u,v)$, 也就有 $-w(path2)>w(path1)+w(u,v)$ 即
+%$$w(path1)+w(path2)+w(u,v)<0$$
+%从而我们找到了这么一个负环, 也就找到了这么一的货币兑换序列能达到套利的目的.\\
+%具体算法如下:
+%\begin{algorithm}[H]
+%	\caption{{\sc Bellman-Ford-Neg-Circle}}
+%	\begin{algorithmic}[1] %每行显示行号
+%		\Require 图 $G=(V,E)$
+%		\Function{{\sc Bellman-Ford-Neg-Circle}}{$G$, $w$, $s$}
+%		\State {\sc Initialize-Single-Source}($G$, $s$)
+%		\For{$i$ = $1$ to $|G.V|-1$} \Comment{包括内层总共 $O(VE)$}
+%			\For{each edge$(u,v)\in G.E$}
+%				\State {\sc Relax}($u$, $v$, $w$)
+%			\EndFor
+%		\EndFor
+%		\State find an edge $(u,v)$ satisfies $v.d>u.d+w(u,v)$
+%		\If{not found} \State \Return error \EndIf
+%		\State path1 = {\sc Get-Path-From-To}(s, u) \Comment{$O(E)$}
+%		\State path2 = {\sc Get-Path-From-To}(s, v).reverse() \Comment{$O(E)$}
+%		\State path = path1 + (u,v) + path2
+%		\State \Return path		
+%		\EndFunction
+%	\end{algorithmic}
+%\end{algorithm}
+%因此总的\underline{时间复杂度其实还是 $O(VE)=O(V^3)$}(因为这里是完全图)\\
+
+\newpage
+\section*{3.}
+\noindent \textbf{假定在一个权重函数为 $\omega$ 的有向图上运行 $Johnson$ 算法. 证明: 如果图 $G$ 包含一条权重为 0 的环路 $c$, 那么对于环路 $c$ 上的每条边 $(u,v)$, $\hat{w}(u,v)=0$}\\
+\jumpLine
+根据定义 $\hat{w}(u,v)=w(u,v)+h(u)-h(v)\ge 0$ 对任意的 $u, v$ 都成立.\\
+如果环路 $u_1,u_2,\cdots,u_k, u_{k+1}=u_1$ 权重为0, 那么 $\sum\limits_{i=1}^{k}w(u_i,u_{i+1})=0$\\
+因此
+\begin{align*}
+\sum\limits_{i=1, i\not=j}^{k}\hat{w}(u_i,u_{i+1})&=\sum\limits_{i=1,i\not=j}^{k}\left(w(u_i,u_{i+1})+h(u_i)-h(u_{i+1})\right)\\
+&=\sum\limits_{i=1}^{k}w(u_i,u_{i+1})+\sum\limits_{i=1}^{k}\left(h(u_i)-h(u_{i+1})\right)-(w(u_j,u_{j+1})+h(u_j)-h(u_{j+1}))\\
+&=-(w(u_j,u_{j+1})+h(u_j)-h(u_{j+1}))\\
+\end{align*}
+又$\hat{w}(x,y)\ge0$, 故
+$$0\le\sum\limits_{i=1,i\not=j}^{k}\hat{w}(u_i,u_{i+1})=-(w(u_j,u_{j+1})+h(u_j)-h(u_{j+1}))$$
+即$$0\le-(w(u_j,u_{j+1})+h(u_j)-h(u_{j+1}))=-\hat{w}(u_j,u_{j+1})\le0$$
+故$$\hat{w}(u_j,u_{j+1})=0$$
+这对所有的 $j$ 都成立, 因此对于环路 $c$ 上的每条边 $(u,v)$, $\hat{w}(u,v)=0$
+\hfill$\square$
+
+\newpage
+\section*{4.}
+\noindent \textbf{(最大流更新) 设 $G=(V,E)$ 是一个源结点为 $s$, 汇结点为 $t$ 的流网络, 其容量全部为整数值. 假定我们已经给定 $G$ 的一个最大流.}
+\subsection*{a.}
+\noindent \textbf{如果将单条边 $(u,v)\in E$ 的容量增加一个单位, 请给出一个 $O(V+E)$ 时间的算法来对最大流进行更新.}\\
+\jumpLine
+实际上只要走一步 Ford-Fulkerson 算法即可, 其时间复杂度恰为 $O(E+V)$. 下面细说之:
+\begin{itemize}
+\item 如果 $(u,v)$ 在容量增加之前, 对应在残存网络里的同向边剩余流量至少为 1, 那么这时 $(u,v)$ 多增加 1 个容量单位也不会改变找不到增广路径的事实. 否则, 原本的残存网络中也能找到增广路径, 只不过流量小了 1.
+\item 如果 $(u,v)$ 在容量增加之前, 对应在残存网络里的同向边剩余流量至少为 0, 那么这时我们就做一遍 Ford-Fulkerson 算法, 从而尝试更新含有 $(u,v)$ 的增广路径.(必然含有, 否则原残存网络中仍存在增广路径). 而更新完毕后, 必然已经是最大流, 这是因为:
+	\begin{itemize}
+	\item 如果刚才的更新有让流量增加(最多加了1), 我们可以在原图中选出一个最小割, 其将 $(u,v)$ 割开(这是因为 $(u,v)$ 满了), 这时, 在容量增加之后, 最小割对应的容量多了 1, 这时由于刚才所述过程做了更新使得总流量 +1, 因此此时总流量已经达到该割容量, 故达到了最大流.
+	\item 如果没有, 则说明没有增广路径, 已经是最大流
+	\end{itemize}
+\end{itemize}
+具体算法可以这样写出:
+\begin{algorithm}[H]
+	\caption{{\sc Update-Maxflow-When-Increase}}
+	\begin{algorithmic}[1] %每行显示行号
+	\State DFS 找一条增广路径
+	\If{找不到} \State{结束}
+	\Else \State{按 Ford-Folkerson 算法更新最大流}
+	\EndIf
+	\end{algorithmic}
+\end{algorithm}
+结合上述分析该算法显然是 $O(V+E)$ 的
+
+\subsection*{b.}
+\noindent \textbf{如果将单条边 $(u,v)\in E$ 的容量减少一个单位, 请给出一个 $O(V+E)$ 时间的算法来对最大流进行更新.}\\
+\jumpLine
+与前面的类似.
+\begin{itemize}
+\item 如果 $(u,v)$ 在容量减少之前, 原该边上流量不足容量-1(直观上, 该边没用满), 那么这时 $(u,v)$ 减小 1 个容量单位后, 仍然无法在原残存网络中找到一个增广路径. 否则, 原本的残存网络中将也能找到增广路径, 只不过流量多 1.
+\item 但如果 $(u,v)$ 在容量减少之前, 原该边上流量恰等于其容量-1(直观上, 该边用满了), 那么这时减少其容量就需要将某条沿该边的 path 上所有流量减 1. 这涉及一个 $O(V+E)$ 的 BFS. 而该操作后, 割开 $(u,v)$ 的一个割.\\
+此后, 还要进行一次 Ford-Fulkerson 算法的迭代, 因为刚才的 decrease 可能使得有新的增广路径出现, 但又最多出现一条(以使总流量+1), 否则原流不是最大流:
+	\begin{itemize}
+	\item 如果有多条, 那么选它们而不选包含 $(u,v)$ 的这条能够使得原本的流量更大
+	\end{itemize}
+\end{itemize}
+具体算法可以这样写出:
+\begin{algorithm}[H]
+	\caption{{\sc Update-Maxflow-When-Decrease}}
+	\begin{algorithmic}[1] %每行显示行号
+	\State BFS 找到包含 $(u,v)$ 的路径, 令该路径上所有边的流量 -1
+	\State DFS 找一条增广路径
+	\If{找不到} \State{结束}
+	\Else \State{按 Ford-Folkerson 算法更新最大流}
+	\EndIf
+	\end{algorithmic}
+\end{algorithm}
+结合上述分析该算法显然是 $O(V+E)$ 的
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
